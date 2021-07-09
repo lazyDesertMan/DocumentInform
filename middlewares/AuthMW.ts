@@ -4,12 +4,18 @@ import * as jwt from 'jsonwebtoken';
 import auth from '../services/AuthService';
 import UserData from '../models/UserData';
 
-const getToken = (req: express.Request) => {
+/*
+ * \brief ѕолучение токена из cookie
+ */
+function getToken (req: express.Request) {
     if (req.cookies.usr != undefined) {
         return req.cookies.usr;
     }
 }
 
+/*
+ * \brief ѕроверка, что текущий пользователь находитс€ в указанной роли
+ */
 export default (requiredRole) => {
     return (req: express.Request, res: express.Response, next: express.NextFunction) => {
         try {

@@ -9,6 +9,9 @@ router.get('/api/auth', Auth('SomeRole'), async function (req: express.Request, 
     res.send('ok');
 });
 
+/*
+ * Обработка POST-запроса к api/auth. Авторизация пользователя в системе
+ */
 router.post('/api/auth', async function (req : express.Request, res : express.Response) {
     try {
         let login: string = req.body.login;
@@ -16,7 +19,9 @@ router.post('/api/auth', async function (req : express.Request, res : express.Re
         let auth = new AuthService();
         let data = await auth.Login(login, password);
         res.cookie('usr', '' + data);
-        res.send('ok');
+        res.send(true);
+        return;
     } catch (e) { console.error(e); }
+    res.send(false);
 });
 export default router;
