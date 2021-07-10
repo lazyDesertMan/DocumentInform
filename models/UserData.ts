@@ -1,10 +1,25 @@
 /*
  * \brief Данные о пользователе системы 
  */
-export default class UserData {
+class UserData {
     public id:    number;  //!< ID пользователя
-    public email: string;  //!< Электронная почта пользователя
+    public login: string;  //!< Логин пользователя
     public role:  string;  //!< Роль пользователя в системе
     public name:  string;  //!< Полное имя пользователя
-    public group: string;  //!< Подразделение, к которому относится пользователь
+}
+
+/*
+ * \brief Данные о пользователе системы, сохранённые в хранилище данных
+ */
+interface StoredUserData {
+    id:       number;  //!< ID пользователя
+    login:    string;  //!< Логин пользователя
+    password: string;  //!< Хешированный парол
+    name:     string;  //!< Полное имя пользователя
+    role_id:  number;  //!< Роль пользователя в системе
+}
+
+export {
+    StoredUserData,
+    UserData
 }

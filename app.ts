@@ -4,6 +4,7 @@ import * as express from 'express';
 import * as path from 'path';
 import * as console from 'console';
 import auth from './routes/AuthAPI';
+import { DBContext } from './services/DBContext';
 
 const app = express();
 
@@ -22,6 +23,8 @@ app.use(function (req, res, next) {
     return;
 });
 
-app.listen(1337, function () {
+app.listen(1337, async function () {
+    await DBContext.authenticate();
+    await DBContext.sync();
     console.info('Starting listen an port 1337\n');
 });
