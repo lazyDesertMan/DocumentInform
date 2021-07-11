@@ -37,7 +37,7 @@ RoleRepository.init({
         unique: true
     }
 }, {
-    tableName: "role",      //!< Имя таблицы с данными пользователей
+    tableName: "role",      //!< Имя таблицы ролей
     sequelize: DBContext,
     timestamps: false
 });

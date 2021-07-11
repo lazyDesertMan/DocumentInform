@@ -4,8 +4,8 @@ import { DBContext } from "../DBContext";
 import { RoleRepository } from './RoleRepository';
 
 // FIX
-import { UserGroupRepository } from './UserGroupRepository';
-import { GroupRepository } from './GroupRepository';
+import { UserGroupRepository } from './groups/UserGroupRepository';
+import { GroupRepository } from './groups/GroupRepository';
 
 /*
  * \brief Определение необязательных параметров для обработки данных пользователя

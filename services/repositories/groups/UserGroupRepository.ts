@@ -1,9 +1,9 @@
 import { DataTypes, Model } from "sequelize";
-import { UserGroupData } from "../../models/UserGroupData";
-import { DBContext } from "../DBContext";
+import { UserGroupData } from "../../../models/groups/UserGroupData";
+import { DBContext } from "../../DBContext";
 import { GroupRepository } from "./GroupRepository";
 import { PositionRepository } from "./PositionRepository";
-import { UserRepository } from "./UserRepository";
+import { UserRepository } from "../UserRepository";
 
 
 /*
@@ -35,7 +35,7 @@ UserGroupRepository.init({
         allowNull: false,
     },
 }, {
-    tableName: "user_group",      //!< Имя таблицы-связки UserGroup
+    tableName: "user_group",      //!< Имя таблицы-связки работника и группы
     sequelize: DBContext,
     timestamps: false
 });

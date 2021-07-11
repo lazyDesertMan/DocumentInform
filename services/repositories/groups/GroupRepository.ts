@@ -1,7 +1,7 @@
 import { DataTypes, Model, Optional } from "sequelize";
-import { GroupData } from "../../models/GroupData";
-import { DBContext } from "../DBContext";
-import { UserRepository } from "./UserRepository";
+import { GroupData } from "../../../models/groups/GroupData";
+import { DBContext } from "../../DBContext";
+import { UserRepository } from "../UserRepository";
 
 
 /*
@@ -45,7 +45,7 @@ GroupRepository.init({
         unique: true         // TODO: Может ли один человек руководить несколькими группами?
     },
 }, {
-    tableName: "group",      //!< Имя таблицы Group
+    tableName: "group",      //!< Имя таблицы подразделений
     sequelize: DBContext,
     timestamps: false
 });

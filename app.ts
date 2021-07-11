@@ -6,10 +6,15 @@ import * as console from 'console';
 import auth from './routes/AuthAPI';
 import user from './routes/UserAPI';
 import { DBContext } from './services/DBContext';
-import { GroupHierarchyRepository } from './services/repositories/GroupHierarchyRepository';
-import { GroupRepository } from './services/repositories/GroupRepository';
-import { PositionRepository } from './services/repositories/PositionRepository';
-import { UserGroupRepository } from './services/repositories/UserGroupRepository';
+import { GroupHierarchyRepository } from './services/repositories/groups/GroupHierarchyRepository';
+import { GroupRepository } from './services/repositories/groups/GroupRepository';
+import { PositionRepository } from './services/repositories/groups/PositionRepository';
+import { UserGroupRepository } from './services/repositories/groups/UserGroupRepository';
+import { DocumentRepository } from './services/repositories/documents/DocumentRepository';
+import { ReadFactRepository } from './services/repositories/documents/ReadFactRepository';
+import { ReplaceRepository } from './services/repositories/documents/ReplaceRepository';
+import { ResendFactRepository } from './services/repositories/documents/ResendFactRepository';
+import { TaskRepository } from './services/repositories/documents/TaskRepository';
 
 const app = express();
 
@@ -38,6 +43,12 @@ app.listen(1337, async function () {
     GroupRepository.findAll();
     PositionRepository.findAll();
     UserGroupRepository.findAll();
+
+    DocumentRepository.findAll();
+    ReadFactRepository.findAll();
+    ReplaceRepository.findAll();
+    ResendFactRepository.findAll();
+    TaskRepository.findAll();
 
     console.info('Starting listen an port 1337\n');
 });

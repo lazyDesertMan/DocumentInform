@@ -1,7 +1,7 @@
 import { DataTypes, Model, Optional } from "sequelize";
-import { GroupHierarchyData } from "../../models/GroupHierarchyData";
-import { DBContext } from "../DBContext";
-import { GroupRepository } from "./GroupRepository";
+import { GroupHierarchyData } from "../../../models/groups/GroupHierarchyData";
+import { DBContext } from "../../DBContext";
+import { GroupRepository } from "../GroupRepository";
 
 /*
  * \brief Хранилище ролей
@@ -19,14 +19,15 @@ GroupHierarchyRepository.init({
     group: {
         type: DataTypes.BIGINT,
         allowNull: false,
+        unique: true
     },
     // ID родительской группы
     mother_group: {
         type: DataTypes.BIGINT,
-        allowNull: false,
+        allowNull: false
     }
 }, {
-    tableName: "group_hierarchy",      //!< Имя таблицы GroupHierarchy
+    tableName: "group_hierarchy",      //!< Имя таблицы иерархии подразделений
     sequelize: DBContext,
     timestamps: false
 });

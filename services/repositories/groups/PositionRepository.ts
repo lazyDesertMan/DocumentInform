@@ -1,6 +1,6 @@
 import { DataTypes, Model, Optional } from "sequelize";
-import { PositionData } from "../../models/PositionData";
-import { DBContext } from "../DBContext";
+import { PositionData } from "../../../models/groups/PositionData";
+import { DBContext } from "../../DBContext";
 
 
 /*
