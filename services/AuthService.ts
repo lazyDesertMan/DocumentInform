@@ -5,7 +5,8 @@ import { RoleRepository } from './repositories/RoleRepository';
 import { UserRepository } from './repositories/UserRepository';
 
 export default class AuthService {
-    public static readonly JWTKey = 'SecretKey';
+    public  static readonly JWTKey = 'SecretKey';
+    private static readonly HashLength = 64;
 
     private CreateJWT(user: UserData) {
         return jwt.sign({ user }, AuthService.JWTKey, { expiresIn: '7d' });
@@ -13,7 +14,7 @@ export default class AuthService {
 
     public async Hash(str: string) {
         return await argon2.hash(str, {
-            hashLength: 64,
+            hashLength: AuthService.HashLength,
             type: argon2.argon2i
         });
     }
@@ -21,7 +22,7 @@ export default class AuthService {
     public async Login(user_login: string, user_password: string): Promise<any> {
         let user = await UserRepository.findOne({ where: { login: user_login }});
         if (user !== null) {
-            let isCorrect: boolean = await argon2.verify(user.password, user_password, { type: argon2.argon2i, hashLength: 64 });
+            let isCorrect: boolean = await argon2.verify(user.password, user_password, { type: argon2.argon2i, hashLength: AuthService.HashLength });
             if (isCorrect) {
                 let userData = new UserData();
                 userData.id = user.id;

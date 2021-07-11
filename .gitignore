@@ -2,6 +2,7 @@
 **/obj
 **/.vs
 **/node_modules
+**/public
 *.user
 *proj
 *.sln

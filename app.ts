@@ -4,6 +4,7 @@ import * as express from 'express';
 import * as path from 'path';
 import * as console from 'console';
 import auth from './routes/AuthAPI';
+import user from './routes/UserAPI';
 import { DBContext } from './services/DBContext';
 
 const app = express();
@@ -15,6 +16,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use('/', auth);
+app.use('/', user);
 
 app.use(function (req, res, next) {
     console.warn((new Date()).toLocaleString('ru') + ': Unknow address \'' + req.url + '\'');
