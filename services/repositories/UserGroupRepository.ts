@@ -1,30 +1,17 @@
-import { DataTypes, Model, Optional } from "sequelize";
+import { DataTypes, Model } from "sequelize";
 import { UserGroupData } from "../../models/UserGroupData";
 import { DBContext } from "../DBContext";
-
-// FIX
+import { GroupRepository } from "./GroupRepository";
+import { PositionRepository } from "./PositionRepository";
 import { UserRepository } from "./UserRepository";
 
 
 /*
  * \brief Хранилище связки пользователей с группой и должностью
  */
-class UserGroupRepository implements UserGroupData {
-    static init(arg0: {
-        // ID пользователя
-        user_id: { type: DataTypes.BigIntDataTypeConstructor; allowNull: boolean; };
-        // ID группы
-        group_id: { type: DataTypes.BigIntDataTypeConstructor; allowNull: boolean; };
-        // ID должности
-        position_id: { type: DataTypes.BigIntDataTypeConstructor; allowNull: boolean; };
-    }, arg1: {
-        tableName: string; //!< Имя таблицы-связки UserGroup
-        sequelize: import("sequelize").Sequelize; timestamps: boolean;
-    }) {
-        throw new Error("Method not implemented.");
-    }
-    public user_id!: number;  //!< ID пользователя
-    public group_id!: number;  //!< ID группы
+class UserGroupRepository extends Model<UserGroupData> {
+    public user_id!:     number;  //!< ID пользователя
+    public group_id!:    number;  //!< ID группы
     public position_id!: number;  //!< ID должности
 }
 
@@ -52,6 +39,15 @@ UserGroupRepository.init({
     sequelize: DBContext,
     timestamps: false
 });
+
+UserGroupRepository.belongsTo(UserRepository, { targetKey: "id", foreignKey: "user_id" });
+UserRepository.hasOne(UserGroupRepository, { sourceKey: "id", foreignKey: "user_id" });
+
+UserGroupRepository.belongsTo(GroupRepository, { targetKey: "id", foreignKey: "group_id" });
+GroupRepository.hasOne(UserGroupRepository, { sourceKey: "id", foreignKey: "group_id" });
+
+UserGroupRepository.belongsTo(PositionRepository, { targetKey: "id", foreignKey: "position_id" });
+PositionRepository.hasOne(UserGroupRepository, { sourceKey: "id", foreignKey: "position_id" });
 
 export {
     UserGroupRepository

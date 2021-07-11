@@ -1,6 +1,7 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import { GroupData } from "../../models/GroupData";
 import { DBContext } from "../DBContext";
+import { UserRepository } from "./UserRepository";
 
 
 /*
@@ -14,8 +15,8 @@ interface GroupAttributes extends Optional<GroupData, 'id'> { }
  * \brief Хранилище групп
  */
 class GroupRepository extends Model<GroupAttributes> implements GroupData {
-    public id!: number;  //!< ID группы
-    public name!: string;  //!< Название группы
+    public id!:     number;  //!< ID группы
+    public name!:   string;  //!< Название группы
     public leader!: number;  //!< ID лидера группы
 }
 
@@ -41,13 +42,16 @@ GroupRepository.init({
     leader: {
         type: DataTypes.BIGINT,
         allowNull: false,
-        unique: true // МОЖЕТ ЛИ ЛИДЕР ГРУППЫ БЫТЬ ОДИНАКОВЫЙ В ДВУХ ИЛИ БОЛЕЕ ГРУППАХ????????????????????????????????
+        unique: true         // TODO: Может ли один человек руководить несколькими группами?
     },
 }, {
     tableName: "group",      //!< Имя таблицы Group
     sequelize: DBContext,
     timestamps: false
 });
+
+GroupRepository.belongsTo(UserRepository, { targetKey: "id", foreignKey: "leader" });
+UserRepository.hasOne(GroupRepository, { sourceKey: "id", foreignKey: "leader" });
 
 export {
     GroupRepository

@@ -14,7 +14,7 @@ interface PositionAttributes extends Optional<PositionData, 'id'> { }
  * \brief Хранилище должностей
  */
 class PositionRepository extends Model<PositionAttributes> implements PositionData {
-    public id!: number;  //!< ID должности
+    public id!:   number;  //!< ID должности
     public name!: string;  //!< Название должности
 }
 

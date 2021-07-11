@@ -66,9 +66,6 @@ UserRepository.init({
 UserRepository.belongsTo(RoleRepository, { targetKey: "id", foreignKey: "role_id" });
 RoleRepository.hasOne(UserRepository, { sourceKey: "id", foreignKey: "role_id" });
 
-// FIX
-UserRepository.belongsTo(GroupRepository, { targetKey: "leader", foreignKey: "id" });
-GroupRepository.hasOne(UserRepository, { sourceKey: "leader", foreignKey: "id" });
 export {
     UserRepository
 }
