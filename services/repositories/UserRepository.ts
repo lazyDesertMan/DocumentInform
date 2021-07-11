@@ -3,6 +3,10 @@ import { StoredUserData } from "../../models/UserData";
 import { DBContext } from "../DBContext";
 import { RoleRepository } from './RoleRepository';
 
+// FIX
+import { UserGroupRepository } from './UserGroupRepository';
+import { GroupRepository } from './GroupRepository';
+
 /*
  * \brief Определение необязательных параметров для обработки данных пользователя
  * 
