@@ -4,30 +4,30 @@ import { DBContext } from "../../DBContext";
 import { TaskRepository } from "./TaskRepository";
 
 /*
- * \brief Хранилище данных о заменах документов
+ * \brief РҐСЂР°РЅРёР»РёС‰Рµ РґР°РЅРЅС‹С… Рѕ Р·Р°РјРµРЅР°С… РґРѕРєСѓРјРµРЅС‚РѕРІ
  */
 class ReadFactRepository extends Model<ReadFactData> {
-    public task_id!:  number;  //!< ID прочитанного документа
-    public read_date!: Date;   //!< Дата и время ознакомления с документом
+    public task_id!:  number;  //!< ID РїСЂРѕС‡РёС‚Р°РЅРЅРѕРіРѕ РґРѕРєСѓРјРµРЅС‚Р°
+    public read_date!: Date;   //!< Р”Р°С‚Р° Рё РІСЂРµРјСЏ РѕР·РЅР°РєРѕРјР»РµРЅРёСЏ СЃ РґРѕРєСѓРјРµРЅС‚РѕРј
 }
 
 /*
- * \brief Определение модели таблицы замены документов
+ * \brief РћРїСЂРµРґРµР»РµРЅРёРµ РјРѕРґРµР»Рё С‚Р°Р±Р»РёС†С‹ Р·Р°РјРµРЅС‹ РґРѕРєСѓРјРµРЅС‚РѕРІ
  */
 ReadFactRepository.init({
-    // ID задачи
+    // ID Р·Р°РґР°С‡Рё
     task_id: {
         type: DataTypes.BIGINT,
         allowNull: false,
         unique: true
     },
-    // ID дата ознакомления
+    // ID РґР°С‚Р° РѕР·РЅР°РєРѕРјР»РµРЅРёСЏ
     read_date: {
         type: DataTypes.DATE,
         allowNull: false,
     }
 }, {
-    tableName: "read_fact",      //!< Имя таблицы фактов ознакомления с документами
+    tableName: "read_fact",      //!< РРјСЏ С‚Р°Р±Р»РёС†С‹ С„Р°РєС‚РѕРІ РѕР·РЅР°РєРѕРјР»РµРЅРёСЏ СЃ РґРѕРєСѓРјРµРЅС‚Р°РјРё
     sequelize: DBContext,
     timestamps: false
 });

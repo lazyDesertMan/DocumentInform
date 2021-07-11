@@ -4,19 +4,19 @@ import { DBContext } from "../../DBContext";
 import { TaskRepository } from "./TaskRepository";
 
 /*
- * \brief Хранилище данных о заменах документов
+ * \brief РҐСЂР°РЅРёР»РёС‰Рµ РґР°РЅРЅС‹С… Рѕ Р·Р°РјРµРЅР°С… РґРѕРєСѓРјРµРЅС‚РѕРІ
  */
 class ResendFactRepository extends Model<ResendFactData> {
-    public task_id!: number;          //!< ID задания, в рамках которого пересылается документ
-    public resend_task_id!: number;   //!< ID нового задания
-    public resend_date!: Date;        //!< Дата и время пересылки
+    public task_id!: number;          //!< ID Р·Р°РґР°РЅРёСЏ, РІ СЂР°РјРєР°С… РєРѕС‚РѕСЂРѕРіРѕ РїРµСЂРµСЃС‹Р»Р°РµС‚СЃСЏ РґРѕРєСѓРјРµРЅС‚
+    public resend_task_id!: number;   //!< ID РЅРѕРІРѕРіРѕ Р·Р°РґР°РЅРёСЏ
+    public resend_date!: Date;        //!< Р”Р°С‚Р° Рё РІСЂРµРјСЏ РїРµСЂРµСЃС‹Р»РєРё
 }
 
 /*
- * \brief Определение модели таблицы замены документов
+ * \brief РћРїСЂРµРґРµР»РµРЅРёРµ РјРѕРґРµР»Рё С‚Р°Р±Р»РёС†С‹ Р·Р°РјРµРЅС‹ РґРѕРєСѓРјРµРЅС‚РѕРІ
  */
 ResendFactRepository.init({
-    // ID задачи
+    // ID Р·Р°РґР°С‡Рё
     task_id: {
         type: DataTypes.BIGINT,
         allowNull: false,
@@ -27,13 +27,13 @@ ResendFactRepository.init({
         allowNull: false,
         unique: true
     },
-    // ID дата ознакомления
+    // ID РґР°С‚Р° РѕР·РЅР°РєРѕРјР»РµРЅРёСЏ
     resend_date: {
         type: DataTypes.DATE,
         allowNull: false,
     }
 }, {
-    tableName: "resend_fact",      //!< Имя таблицы пересылки документов
+    tableName: "resend_fact",      //!< РРјСЏ С‚Р°Р±Р»РёС†С‹ РїРµСЂРµСЃС‹Р»РєРё РґРѕРєСѓРјРµРЅС‚РѕРІ
     sequelize: DBContext,
     timestamps: false
 });

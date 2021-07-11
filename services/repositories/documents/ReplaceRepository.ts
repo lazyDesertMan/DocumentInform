@@ -4,31 +4,31 @@ import { DBContext } from "../../DBContext";
 import { DocumentRepository } from "./DocumentRepository";
 
 /*
- * \brief Хранилище данных о заменах документов
+ * \brief РҐСЂР°РЅРёР»РёС‰Рµ РґР°РЅРЅС‹С… Рѕ Р·Р°РјРµРЅР°С… РґРѕРєСѓРјРµРЅС‚РѕРІ
  */
 class ReplaceRepository extends Model<ReplaceData> {
-    public old_version!: number;  //!< ID заменяемого документа
-    public new_version!: number;  //!< ID документа, заменяющего устаревший
+    public old_version!: number;  //!< ID Р·Р°РјРµРЅСЏРµРјРѕРіРѕ РґРѕРєСѓРјРµРЅС‚Р°
+    public new_version!: number;  //!< ID РґРѕРєСѓРјРµРЅС‚Р°, Р·Р°РјРµРЅСЏСЋС‰РµРіРѕ СѓСЃС‚Р°СЂРµРІС€РёР№
 }
 
 /*
- * \brief Определение модели таблицы замены документов
+ * \brief РћРїСЂРµРґРµР»РµРЅРёРµ РјРѕРґРµР»Рё С‚Р°Р±Р»РёС†С‹ Р·Р°РјРµРЅС‹ РґРѕРєСѓРјРµРЅС‚РѕРІ
  */
 ReplaceRepository.init({
-    // ID заменяемого документа
+    // ID Р·Р°РјРµРЅСЏРµРјРѕРіРѕ РґРѕРєСѓРјРµРЅС‚Р°
     old_version: {
         type: DataTypes.BIGINT,
         allowNull: false,
         unique: true
     },
-    // ID документа, заменяющего устаревший
+    // ID РґРѕРєСѓРјРµРЅС‚Р°, Р·Р°РјРµРЅСЏСЋС‰РµРіРѕ СѓСЃС‚Р°СЂРµРІС€РёР№
     new_version: {
         type: DataTypes.BIGINT,
         allowNull: false,
         unique: true
     }
 }, {
-    tableName: "replace_document",      //!< Имя таблицы замены документов
+    tableName: "replace_document",      //!< РРјСЏ С‚Р°Р±Р»РёС†С‹ Р·Р°РјРµРЅС‹ РґРѕРєСѓРјРµРЅС‚РѕРІ
     sequelize: DBContext,
     timestamps: false
 });

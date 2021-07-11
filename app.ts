@@ -38,7 +38,7 @@ app.listen(1337, async function () {
     await DBContext.authenticate();
     await DBContext.sync();
 
-    // Принудительное создание таблиц (на время разработки)
+    // РџСЂРёРЅСѓРґРёС‚РµР»СЊРЅРѕРµ СЃРѕР·РґР°РЅРёРµ С‚Р°Р±Р»РёС† (РЅР° РІСЂРµРјСЏ СЂР°Р·СЂР°Р±РѕС‚РєРё)
     GroupHierarchyRepository.findAll();
     GroupRepository.findAll();
     PositionRepository.findAll();

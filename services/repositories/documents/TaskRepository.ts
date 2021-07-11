@@ -7,31 +7,31 @@ import { DocumentRepository } from "./DocumentRepository";
 
 
 /*
- * \brief Определение необязательных параметров для обработки групп
+ * \brief РћРїСЂРµРґРµР»РµРЅРёРµ РЅРµРѕР±СЏР·Р°С‚РµР»СЊРЅС‹С… РїР°СЂР°РјРµС‚СЂРѕРІ РґР»СЏ РѕР±СЂР°Р±РѕС‚РєРё РіСЂСѓРїРї
  * 
- * Параметр id автоматически генерируется СУБД
+ * РџР°СЂР°РјРµС‚СЂ id Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё РіРµРЅРµСЂРёСЂСѓРµС‚СЃСЏ РЎРЈР‘Р”
  */
 interface TaskAttributes extends Optional<TaskData, 'id'> { }
 
 /*
- * \brief Хранилище групп
+ * \brief РҐСЂР°РЅРёР»РёС‰Рµ РіСЂСѓРїРї
  */
 class TaskRepository extends Model<TaskAttributes> implements TaskData {
-    public id!:          number;   //!< ID задачи
-    public sender!:      number;   //!< ID пользователя, выдавшего задачу
-    public recipient!:   number;   //!< ID пользователя, получившего задачу
-    public document_id!: number;   //!< ID документа, с которым требуется ознакомиться
-    public must_read!:   boolean;  //!< Должен ли получатель ознакомиться с документом
-    public must_resend!: boolean;  //!< Должен ли получатель переслать документ подчинённым
-    public send_date!:   Date;     //!< Дата выдачи задачи
-    public deadline!:    Date;     //!< Крайний срок ознакомления с документом
+    public id!:          number;   //!< ID Р·Р°РґР°С‡Рё
+    public sender!:      number;   //!< ID РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ, РІС‹РґР°РІС€РµРіРѕ Р·Р°РґР°С‡Сѓ
+    public recipient!:   number;   //!< ID РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ, РїРѕР»СѓС‡РёРІС€РµРіРѕ Р·Р°РґР°С‡Сѓ
+    public document_id!: number;   //!< ID РґРѕРєСѓРјРµРЅС‚Р°, СЃ РєРѕС‚РѕСЂС‹Рј С‚СЂРµР±СѓРµС‚СЃСЏ РѕР·РЅР°РєРѕРјРёС‚СЊСЃСЏ
+    public must_read!:   boolean;  //!< Р”РѕР»Р¶РµРЅ Р»Рё РїРѕР»СѓС‡Р°С‚РµР»СЊ РѕР·РЅР°РєРѕРјРёС‚СЊСЃСЏ СЃ РґРѕРєСѓРјРµРЅС‚РѕРј
+    public must_resend!: boolean;  //!< Р”РѕР»Р¶РµРЅ Р»Рё РїРѕР»СѓС‡Р°С‚РµР»СЊ РїРµСЂРµСЃР»Р°С‚СЊ РґРѕРєСѓРјРµРЅС‚ РїРѕРґС‡РёРЅС‘РЅРЅС‹Рј
+    public send_date!:   Date;     //!< Р”Р°С‚Р° РІС‹РґР°С‡Рё Р·Р°РґР°С‡Рё
+    public deadline!:    Date;     //!< РљСЂР°Р№РЅРёР№ СЃСЂРѕРє РѕР·РЅР°РєРѕРјР»РµРЅРёСЏ СЃ РґРѕРєСѓРјРµРЅС‚РѕРј
 }
 
 /*
- * \brief Определение модели таблицы групп
+ * \brief РћРїСЂРµРґРµР»РµРЅРёРµ РјРѕРґРµР»Рё С‚Р°Р±Р»РёС†С‹ РіСЂСѓРїРї
  */
 TaskRepository.init({
-    // ID документа
+    // ID РґРѕРєСѓРјРµРЅС‚Р°
     id: {
         type: DataTypes.BIGINT,
         allowNull: false,
@@ -68,7 +68,7 @@ TaskRepository.init({
         allowNull: false
     }
 }, {
-    tableName: "task",      //!< Имя таблицы заданий на ознакомление
+    tableName: "task",      //!< РРјСЏ С‚Р°Р±Р»РёС†С‹ Р·Р°РґР°РЅРёР№ РЅР° РѕР·РЅР°РєРѕРјР»РµРЅРёРµ
     sequelize: DBContext,
     timestamps: false
 });

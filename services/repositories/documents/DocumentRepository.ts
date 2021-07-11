@@ -3,27 +3,27 @@ import { DocumentData } from "../../../models/documents/DocumentData";
 import { DBContext } from "../../DBContext";
 
 /*
- * \brief Определение необязательных параметров для обработки документов
+ * \brief РћРїСЂРµРґРµР»РµРЅРёРµ РЅРµРѕР±СЏР·Р°С‚РµР»СЊРЅС‹С… РїР°СЂР°РјРµС‚СЂРѕРІ РґР»СЏ РѕР±СЂР°Р±РѕС‚РєРё РґРѕРєСѓРјРµРЅС‚РѕРІ
  * 
- * Параметр id автоматически генерируется СУБД
+ * РџР°СЂР°РјРµС‚СЂ id Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё РіРµРЅРµСЂРёСЂСѓРµС‚СЃСЏ РЎРЈР‘Р”
  */
 interface DocumentAttributes extends Optional<DocumentData, 'id'> { }
 
 /*
- * \brief Хранилище групп
+ * \brief РҐСЂР°РЅРёР»РёС‰Рµ РіСЂСѓРїРї
  */
 class DocumentRepository extends Model<DocumentAttributes> implements DocumentData {
-    public id!:             number;  //!< ID документа
-    public name!:           string;  //!< Название документа (официальное)
-    public file_path!:      string;  //!< Имя файла (с расширением)
-    public effective_date!: Date;    //!< Дата вступления документа в силу
+    public id!:             number;  //!< ID РґРѕРєСѓРјРµРЅС‚Р°
+    public name!:           string;  //!< РќР°Р·РІР°РЅРёРµ РґРѕРєСѓРјРµРЅС‚Р° (РѕС„РёС†РёР°Р»СЊРЅРѕРµ)
+    public file_path!:      string;  //!< РРјСЏ С„Р°Р№Р»Р° (СЃ СЂР°СЃС€РёСЂРµРЅРёРµРј)
+    public effective_date!: Date;    //!< Р”Р°С‚Р° РІСЃС‚СѓРїР»РµРЅРёСЏ РґРѕРєСѓРјРµРЅС‚Р° РІ СЃРёР»Сѓ
 }
 
 /*
- * \brief Определение модели таблицы документов
+ * \brief РћРїСЂРµРґРµР»РµРЅРёРµ РјРѕРґРµР»Рё С‚Р°Р±Р»РёС†С‹ РґРѕРєСѓРјРµРЅС‚РѕРІ
  */
 DocumentRepository.init({
-    // ID документа
+    // ID РґРѕРєСѓРјРµРЅС‚Р°
     id: {
         type: DataTypes.BIGINT,
         allowNull: false,
@@ -31,25 +31,25 @@ DocumentRepository.init({
         primaryKey: true,
         unique: true
     },
-    // Название документа (официальное)
+    // РќР°Р·РІР°РЅРёРµ РґРѕРєСѓРјРµРЅС‚Р° (РѕС„РёС†РёР°Р»СЊРЅРѕРµ)
     name: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true
     },
-    // Имя файла (с расширением)
+    // РРјСЏ С„Р°Р№Р»Р° (СЃ СЂР°СЃС€РёСЂРµРЅРёРµРј)
     file_path: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true
     },
-    // Дата вступления документа в силу
+    // Р”Р°С‚Р° РІСЃС‚СѓРїР»РµРЅРёСЏ РґРѕРєСѓРјРµРЅС‚Р° РІ СЃРёР»Сѓ
     effective_date: {
         type: DataTypes.DATE,
         allowNull: false
     }
 }, {
-    tableName: "document",      //!< Имя таблицы документов
+    tableName: "document",      //!< РРјСЏ С‚Р°Р±Р»РёС†С‹ РґРѕРєСѓРјРµРЅС‚РѕРІ
     sequelize: DBContext,
     timestamps: false
 });

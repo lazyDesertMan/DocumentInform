@@ -7,35 +7,35 @@ import { UserRepository } from "../UserRepository";
 
 
 /*
- * \brief Хранилище связки пользователей с группой и должностью
+ * \brief РҐСЂР°РЅРёР»РёС‰Рµ СЃРІСЏР·РєРё РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№ СЃ РіСЂСѓРїРїРѕР№ Рё РґРѕР»Р¶РЅРѕСЃС‚СЊСЋ
  */
 class UserGroupRepository extends Model<UserGroupData> {
-    public user_id!:     number;  //!< ID пользователя
-    public group_id!:    number;  //!< ID группы
-    public position_id!: number;  //!< ID должности
+    public user_id!:     number;  //!< ID РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
+    public group_id!:    number;  //!< ID РіСЂСѓРїРїС‹
+    public position_id!: number;  //!< ID РґРѕР»Р¶РЅРѕСЃС‚Рё
 }
 
 /*
- * \brief Определение модели таблицы-связки пользователь-группа-должность
+ * \brief РћРїСЂРµРґРµР»РµРЅРёРµ РјРѕРґРµР»Рё С‚Р°Р±Р»РёС†С‹-СЃРІСЏР·РєРё РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ-РіСЂСѓРїРїР°-РґРѕР»Р¶РЅРѕСЃС‚СЊ
  */
 UserGroupRepository.init({
-    // ID пользователя
+    // ID РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
     user_id: {
         type: DataTypes.BIGINT,
         allowNull: false,
     },
-    // ID группы
+    // ID РіСЂСѓРїРїС‹
     group_id: {
         type: DataTypes.BIGINT,
         allowNull: false,
     },
-    // ID должности
+    // ID РґРѕР»Р¶РЅРѕСЃС‚Рё
     position_id: {
         type: DataTypes.BIGINT,
         allowNull: false,
     },
 }, {
-    tableName: "user_group",      //!< Имя таблицы-связки работника и группы
+    tableName: "user_group",      //!< РРјСЏ С‚Р°Р±Р»РёС†С‹-СЃРІСЏР·РєРё СЂР°Р±РѕС‚РЅРёРєР° Рё РіСЂСѓРїРїС‹
     sequelize: DBContext,
     timestamps: false
 });

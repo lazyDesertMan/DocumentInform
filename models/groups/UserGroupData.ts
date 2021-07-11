@@ -1,10 +1,10 @@
 /*
- * \brief Данные о группе пользователя
+ * \brief Р”Р°РЅРЅС‹Рµ Рѕ РіСЂСѓРїРїРµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
  */
 class UserGroupData {
-    public user_id:     number;  //!< ID пользователя
-    public group_id:    number;  //!< ID группы
-    public position_id: number;  //!< ID должности пользователя
+    public user_id:     number;  //!< ID РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
+    public group_id:    number;  //!< ID РіСЂСѓРїРїС‹
+    public position_id: number;  //!< ID РґРѕР»Р¶РЅРѕСЃС‚Рё РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
 }
 
 export {

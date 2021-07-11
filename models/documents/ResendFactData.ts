@@ -1,10 +1,10 @@
 /*
- * \brief Данные о пересылке файла
+ * \brief Р”Р°РЅРЅС‹Рµ Рѕ РїРµСЂРµСЃС‹Р»РєРµ С„Р°Р№Р»Р°
  */
 class ResendFactData {
-    public task_id: number;          //!< ID задания, в рамках которого пересылается документ
-    public resend_task_id: number;   //!< ID нового задания
-    public resend_date: Date;        //!< Дата и время пересылки
+    public task_id: number;          //!< ID Р·Р°РґР°РЅРёСЏ, РІ СЂР°РјРєР°С… РєРѕС‚РѕСЂРѕРіРѕ РїРµСЂРµСЃС‹Р»Р°РµС‚СЃСЏ РґРѕРєСѓРјРµРЅС‚
+    public resend_task_id: number;   //!< ID РЅРѕРІРѕРіРѕ Р·Р°РґР°РЅРёСЏ
+    public resend_date: Date;        //!< Р”Р°С‚Р° Рё РІСЂРµРјСЏ РїРµСЂРµСЃС‹Р»РєРё
 }
 
 export {

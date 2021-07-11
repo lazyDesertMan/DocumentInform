@@ -4,25 +4,25 @@ import { DBContext } from "../DBContext";
 
 
 /*
- * \brief Определение необязательных параметров для обработки ролей
+ * \brief РћРїСЂРµРґРµР»РµРЅРёРµ РЅРµРѕР±СЏР·Р°С‚РµР»СЊРЅС‹С… РїР°СЂР°РјРµС‚СЂРѕРІ РґР»СЏ РѕР±СЂР°Р±РѕС‚РєРё СЂРѕР»РµР№
  * 
- * Параметр id автоматически генерируется СУБД
+ * РџР°СЂР°РјРµС‚СЂ id Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё РіРµРЅРµСЂРёСЂСѓРµС‚СЃСЏ РЎРЈР‘Р”
  */
 interface RoleAttributes extends Optional<RoleData, 'id'> { }
 
 /*
- * \brief Хранилище ролей
+ * \brief РҐСЂР°РЅРёР»РёС‰Рµ СЂРѕР»РµР№
  */
 class RoleRepository extends Model<RoleAttributes> implements RoleData {
-    public id!:   number;  //!< ID роли
-    public name!: string;  //!< Название роли
+    public id!:   number;  //!< ID СЂРѕР»Рё
+    public name!: string;  //!< РќР°Р·РІР°РЅРёРµ СЂРѕР»Рё
 }
 
 /*
- * \brief Определение модели таблицы ролей
+ * \brief РћРїСЂРµРґРµР»РµРЅРёРµ РјРѕРґРµР»Рё С‚Р°Р±Р»РёС†С‹ СЂРѕР»РµР№
  */
 RoleRepository.init({
-    // ID роли
+    // ID СЂРѕР»Рё
     id: {
         type: DataTypes.BIGINT,
         allowNull: false,
@@ -30,14 +30,14 @@ RoleRepository.init({
         primaryKey: true,
         unique: true
     },
-    // Название роли
+    // РќР°Р·РІР°РЅРёРµ СЂРѕР»Рё
     name: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true
     }
 }, {
-    tableName: "role",      //!< Имя таблицы ролей
+    tableName: "role",      //!< РРјСЏ С‚Р°Р±Р»РёС†С‹ СЂРѕР»РµР№
     sequelize: DBContext,
     timestamps: false
 });

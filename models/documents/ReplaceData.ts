@@ -1,9 +1,9 @@
 /*
- * \brief Данные о замене файла
+ * \brief Ж’Р°РЅРЅС‹Рµ Рѕ Р·Р°РјРµРЅРµ С„Р°Р№Р»Р°
  */
 class ReplaceData {
-    public old_version: number;  //!< ID заменяемого документа
-    public new_version: number;  //!< ID документа, заменяющего устаревший
+    public old_version: number;  //!< ID Р·Р°РјРµРЅВ¤РµРјРѕРіРѕ РґРѕРєСѓРјРµРЅС‚Р°
+    public new_version: number;  //!< ID РґРѕРєСѓРјРµРЅС‚Р°, Р·Р°РјРµРЅВ¤СЋС‰РµРіРѕ СѓСЃС‚Р°СЂРµРІС€РёР№
 }
 
 export {

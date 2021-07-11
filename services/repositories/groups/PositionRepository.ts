@@ -4,25 +4,25 @@ import { DBContext } from "../../DBContext";
 
 
 /*
- * \brief Определение необязательных параметров для обработки должностей
+ * \brief РћРїСЂРµРґРµР»РµРЅРёРµ РЅРµРѕР±СЏР·Р°С‚РµР»СЊРЅС‹С… РїР°СЂР°РјРµС‚СЂРѕРІ РґР»СЏ РѕР±СЂР°Р±РѕС‚РєРё РґРѕР»Р¶РЅРѕСЃС‚РµР№
  * 
- * Параметр id автоматически генерируется СУБД
+ * РџР°СЂР°РјРµС‚СЂ id Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё РіРµРЅРµСЂРёСЂСѓРµС‚СЃСЏ РЎРЈР‘Р”
  */
 interface PositionAttributes extends Optional<PositionData, 'id'> { }
 
 /*
- * \brief Хранилище должностей
+ * \brief РҐСЂР°РЅРёР»РёС‰Рµ РґРѕР»Р¶РЅРѕСЃС‚РµР№
  */
 class PositionRepository extends Model<PositionAttributes> implements PositionData {
-    public id!:   number;  //!< ID должности
-    public name!: string;  //!< Название должности
+    public id!:   number;  //!< ID РґРѕР»Р¶РЅРѕСЃС‚Рё
+    public name!: string;  //!< РќР°Р·РІР°РЅРёРµ РґРѕР»Р¶РЅРѕСЃС‚Рё
 }
 
 /*
- * \brief Определение модели таблицы должностей
+ * \brief РћРїСЂРµРґРµР»РµРЅРёРµ РјРѕРґРµР»Рё С‚Р°Р±Р»РёС†С‹ РґРѕР»Р¶РЅРѕСЃС‚РµР№
  */
 PositionRepository.init({
-    // ID должности
+    // ID РґРѕР»Р¶РЅРѕСЃС‚Рё
     id: {
         type: DataTypes.BIGINT,
         allowNull: false,
@@ -30,14 +30,14 @@ PositionRepository.init({
         primaryKey: true,
         unique: true
     },
-    // Название должности
+    // РќР°Р·РІР°РЅРёРµ РґРѕР»Р¶РЅРѕСЃС‚Рё
     name: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true
     }
 }, {
-    tableName: "position",      //!< Имя таблицы должностей
+    tableName: "position",      //!< РРјСЏ С‚Р°Р±Р»РёС†С‹ РґРѕР»Р¶РЅРѕСЃС‚РµР№
     sequelize: DBContext,
     timestamps: false
 });

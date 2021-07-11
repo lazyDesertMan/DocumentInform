@@ -1,9 +1,9 @@
 /*
- * \brief Данные о роли
+ * \brief Р”Р°РЅРЅС‹Рµ Рѕ СЂРѕР»Рё
  */
 class RoleData {
-    public id:   number;  //!< ID роли
-    public name: string;  //!< Название роли
+    public id:   number;  //!< ID СЂРѕР»Рё
+    public name: string;  //!< РќР°Р·РІР°РЅРёРµ СЂРѕР»Рё
 }
 
 export {

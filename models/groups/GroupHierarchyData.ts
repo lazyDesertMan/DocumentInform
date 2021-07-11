@@ -1,9 +1,9 @@
 /*
- * \brief Данные о иерархии групп
+ * \brief Р”Р°РЅРЅС‹Рµ Рѕ РёРµСЂР°СЂС…РёРё РіСЂСѓРїРї
  */
 class GroupHierarchyData {
-    public group:        number;  //!< ID группы
-    public mother_group: number;  //!< ID родительской группы
+    public group:        number;  //!< ID РіСЂСѓРїРїС‹
+    public mother_group: number;  //!< ID СЂРѕРґРёС‚РµР»СЊСЃРєРѕР№ РіСЂСѓРїРїС‹
 }
 
 export {

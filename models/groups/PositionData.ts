@@ -1,9 +1,9 @@
 /*
- * \brief Данные о должности
+ * \brief Р”Р°РЅРЅС‹Рµ Рѕ РґРѕР»Р¶РЅРѕСЃС‚Рё
  */
 class PositionData {
-    public id:   number;  //!< ID должности
-    public name: string;  //!< Название должности
+    public id:   number;  //!< ID РґРѕР»Р¶РЅРѕСЃС‚Рё
+    public name: string;  //!< РќР°Р·РІР°РЅРёРµ РґРѕР»Р¶РЅРѕСЃС‚Рё
 }
 
 export {

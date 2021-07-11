@@ -1,10 +1,10 @@
 /*
- * \brief Данные о группе
+ * \brief Р”Р°РЅРЅС‹Рµ Рѕ РіСЂСѓРїРїРµ
  */
 class GroupData {
-    public id:     number;  //!< ID группы
-    public name:   string;  //!< Название группы
-    public leader: number;  //!< ID лидера группы
+    public id:     number;  //!< ID РіСЂСѓРїРїС‹
+    public name:   string;  //!< РќР°Р·РІР°РЅРёРµ РіСЂСѓРїРїС‹
+    public leader: number;  //!< ID Р»РёРґРµСЂР° РіСЂСѓРїРїС‹
 }
 
 export {

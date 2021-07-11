@@ -4,30 +4,30 @@ import { DBContext } from "../../DBContext";
 import { GroupRepository } from "../GroupRepository";
 
 /*
- * \brief Хранилище ролей
+ * \brief РҐСЂР°РЅРёР»РёС‰Рµ СЂРѕР»РµР№
  */
 class GroupHierarchyRepository extends Model<GroupHierarchyData> {
-    public group!:        number;  //!< ID группы
-    public mother_group!: number;  //!< ID родительской группы
+    public group!:        number;  //!< ID РіСЂСѓРїРїС‹
+    public mother_group!: number;  //!< ID СЂРѕРґРёС‚РµР»СЊСЃРєРѕР№ РіСЂСѓРїРїС‹
 }
 
 /*
- * \brief Определение модели таблицы иерхархии групп
+ * \brief РћРїСЂРµРґРµР»РµРЅРёРµ РјРѕРґРµР»Рё С‚Р°Р±Р»РёС†С‹ РёРµСЂС…Р°СЂС…РёРё РіСЂСѓРїРї
  */
 GroupHierarchyRepository.init({
-    // ID группы
+    // ID РіСЂСѓРїРїС‹
     group: {
         type: DataTypes.BIGINT,
         allowNull: false,
         unique: true
     },
-    // ID родительской группы
+    // ID СЂРѕРґРёС‚РµР»СЊСЃРєРѕР№ РіСЂСѓРїРїС‹
     mother_group: {
         type: DataTypes.BIGINT,
         allowNull: false
     }
 }, {
-    tableName: "group_hierarchy",      //!< Имя таблицы иерархии подразделений
+    tableName: "group_hierarchy",      //!< РРјСЏ С‚Р°Р±Р»РёС†С‹ РёРµСЂР°СЂС…РёРё РїРѕРґСЂР°Р·РґРµР»РµРЅРёР№
     sequelize: DBContext,
     timestamps: false
 });

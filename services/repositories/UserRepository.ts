@@ -8,28 +8,28 @@ import { UserGroupRepository } from './groups/UserGroupRepository';
 import { GroupRepository } from './groups/GroupRepository';
 
 /*
- * \brief Определение необязательных параметров для обработки данных пользователя
+ * \brief РћРїСЂРµРґРµР»РµРЅРёРµ РЅРµРѕР±СЏР·Р°С‚РµР»СЊРЅС‹С… РїР°СЂР°РјРµС‚СЂРѕРІ РґР»СЏ РѕР±СЂР°Р±РѕС‚РєРё РґР°РЅРЅС‹С… РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
  * 
- * Параметр id автоматически генерируется СУБД
+ * РџР°СЂР°РјРµС‚СЂ id Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё РіРµРЅРµСЂРёСЂСѓРµС‚СЃСЏ РЎРЈР‘Р”
  */
 interface UserAttributes extends Optional<StoredUserData, 'id'> { }
 
 /*
- * \brief Хранилище данных пользователя
+ * \brief РҐСЂР°РЅРёР»РёС‰Рµ РґР°РЅРЅС‹С… РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
  */
 class UserRepository extends Model<UserAttributes> implements StoredUserData {
-    public id!:       number;  //!< ID пользователя
-    public login!:    string;  //!< Логин пользователя
-    public password!: string;  //!< Хешированный пароль
-    public role_id!:  number;  //!< Роль пользователя в системе
-    public name!:     string;  //!< Полное имя пользователя
+    public id!:       number;  //!< ID РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
+    public login!:    string;  //!< Р›РѕРіРёРЅ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
+    public password!: string;  //!< РҐРµС€РёСЂРѕРІР°РЅРЅС‹Р№ РїР°СЂРѕР»СЊ
+    public role_id!:  number;  //!< Р РѕР»СЊ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РІ СЃРёСЃС‚РµРјРµ
+    public name!:     string;  //!< РџРѕР»РЅРѕРµ РёРјСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
 }
 
 /*
- * \brief Определение модели таблицы пользователей
+ * \brief РћРїСЂРµРґРµР»РµРЅРёРµ РјРѕРґРµР»Рё С‚Р°Р±Р»РёС†С‹ РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№
  */
 UserRepository.init({
-    // ID пользователя
+    // ID РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
     id: {
         type: DataTypes.BIGINT,
         allowNull: false,
@@ -37,28 +37,28 @@ UserRepository.init({
         primaryKey: true,
         unique: true
     },
-    // Логин пользователя
+    // Р›РѕРіРёРЅ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
     login: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    // Хешированный пароль пользователя
+    // РҐРµС€РёСЂРѕРІР°РЅРЅС‹Р№ РїР°СЂРѕР»СЊ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
     password: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    // ID роли пользователя
+    // ID СЂРѕР»Рё РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
     role_id: {
         type: DataTypes.BIGINT,
         allowNull: false
     },
-    // Полное имя пользователя
+    // РџРѕР»РЅРѕРµ РёРјСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
     name: {
         type: DataTypes.STRING,
         allowNull: false
     },
 }, {
-    tableName: "user",      //!< Имя таблицы с данными пользователей
+    tableName: "user",      //!< РРјСЏ С‚Р°Р±Р»РёС†С‹ СЃ РґР°РЅРЅС‹РјРё РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№
     sequelize: DBContext,
     timestamps: false
 });

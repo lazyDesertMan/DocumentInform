@@ -5,26 +5,26 @@ import { UserRepository } from "../UserRepository";
 
 
 /*
- * \brief Определение необязательных параметров для обработки групп
+ * \brief РћРїСЂРµРґРµР»РµРЅРёРµ РЅРµРѕР±СЏР·Р°С‚РµР»СЊРЅС‹С… РїР°СЂР°РјРµС‚СЂРѕРІ РґР»СЏ РѕР±СЂР°Р±РѕС‚РєРё РіСЂСѓРїРї
  * 
- * Параметр id автоматически генерируется СУБД
+ * РџР°СЂР°РјРµС‚СЂ id Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё РіРµРЅРµСЂРёСЂСѓРµС‚СЃСЏ РЎРЈР‘Р”
  */
 interface GroupAttributes extends Optional<GroupData, 'id'> { }
 
 /*
- * \brief Хранилище групп
+ * \brief РҐСЂР°РЅРёР»РёС‰Рµ РіСЂСѓРїРї
  */
 class GroupRepository extends Model<GroupAttributes> implements GroupData {
-    public id!:     number;  //!< ID группы
-    public name!:   string;  //!< Название группы
-    public leader!: number;  //!< ID лидера группы
+    public id!:     number;  //!< ID РіСЂСѓРїРїС‹
+    public name!:   string;  //!< РќР°Р·РІР°РЅРёРµ РіСЂСѓРїРїС‹
+    public leader!: number;  //!< ID Р»РёРґРµСЂР° РіСЂСѓРїРїС‹
 }
 
 /*
- * \brief Определение модели таблицы групп
+ * \brief РћРїСЂРµРґРµР»РµРЅРёРµ РјРѕРґРµР»Рё С‚Р°Р±Р»РёС†С‹ РіСЂСѓРїРї
  */
 GroupRepository.init({
-    // ID группы
+    // ID РіСЂСѓРїРїС‹
     id: {
         type: DataTypes.BIGINT,
         allowNull: false,
@@ -32,20 +32,20 @@ GroupRepository.init({
         primaryKey: true,
         unique: true
     },
-    // Название группы
+    // РќР°Р·РІР°РЅРёРµ РіСЂСѓРїРїС‹
     name: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true
     },
-    // ID лидера группы
+    // ID Р»РёРґРµСЂР° РіСЂСѓРїРїС‹
     leader: {
         type: DataTypes.BIGINT,
         allowNull: false,
-        unique: true         // TODO: Может ли один человек руководить несколькими группами?
+        unique: true         // TODO: РњРѕР¶РµС‚ Р»Рё РѕРґРёРЅ С‡РµР»РѕРІРµРє СЂСѓРєРѕРІРѕРґРёС‚СЊ РЅРµСЃРєРѕР»СЊРєРёРјРё РіСЂСѓРїРїР°РјРё?
     },
 }, {
-    tableName: "group",      //!< Имя таблицы подразделений
+    tableName: "group",      //!< РРјСЏ С‚Р°Р±Р»РёС†С‹ РїРѕРґСЂР°Р·РґРµР»РµРЅРёР№
     sequelize: DBContext,
     timestamps: false
 });
