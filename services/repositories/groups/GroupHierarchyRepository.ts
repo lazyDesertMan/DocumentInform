@@ -1,7 +1,7 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import { GroupHierarchyData } from "../../../models/groups/GroupHierarchyData";
 import { DBContext } from "../../DBContext";
-import { GroupRepository } from "../GroupRepository";
+import { GroupRepository } from "../groups/GroupRepository";
 
 /*
  * \brief Хранилище ролей
