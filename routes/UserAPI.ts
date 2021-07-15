@@ -8,8 +8,11 @@ const UserRouter = express.Router();
 UserRouter.get("/api/file/:name", async function (req: express.Request, res: express.Response) {
     try {
         const name = req.params.name;
-        let data = fs.readFileSync("./public/documents/" + name);
-        res.send(data);
+        var tempFile = "./public/documents/" + name;
+        fs.readFile(tempFile, function (err, data) {
+            res.contentType("application/pdf");
+            res.send(data);
+        });
     } catch (e) {
         console.error(e);
         res.send(false);
