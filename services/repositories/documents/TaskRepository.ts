@@ -1,9 +1,10 @@
 import { DataTypes, Model, Optional } from "sequelize";
-import { DocumentData } from "../../../models/documents/DocumentData";
 import { TaskData } from "../../../models/documents/TaskData";
 import { DBContext } from "../../DBContext";
 import { UserRepository } from "../UserRepository";
 import { DocumentRepository } from "./DocumentRepository";
+import { ReadFactRepository } from "./ReadFactRepository";
+import { ResendFactRepository } from "./ResendFactRepository";
 
 
 /*

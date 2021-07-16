@@ -1,9 +1,16 @@
 import express = require('express');
 import * as fs from 'fs';
+import { ReadFactRepository } from '../services/repositories/documents/ReadFactRepository';
+import { TaskRepository } from '../services/repositories/documents/TaskRepository';
+import { ResendFactRepository } from '../services/repositories/documents/ResendFactRepository';
+import { TaskDetails } from '../models/TaskDetails';
+import RoleCheckMW from '../middlewares/RoleCheckMW';
+import { hostname } from 'os';
+import { DocumentRepository } from '../services/repositories/documents/DocumentRepository';
 const UserRouter = express.Router();
 
 /*
- * \brief Получение файла с указанным именем и расширением
+ * \brief РџРѕР»СѓС‡РµРЅРёРµ С„Р°Р№Р»Р° СЃ СѓРєР°Р·Р°РЅРЅС‹Рј РёРјРµРЅРµРј Рё СЂР°СЃС€РёСЂРµРЅРёРµРј
  */
 UserRouter.get("/api/file/:name", async function (req: express.Request, res: express.Response) {
     try {
@@ -20,16 +27,64 @@ UserRouter.get("/api/file/:name", async function (req: express.Request, res: exp
 });
 
 /*
- * \brief Получение ID файла с указанным именем и расширением
+ * \brief РџРѕР»СѓС‡РµРЅРёРµ РїСѓС‚Рё РґРѕ С„Р°Р№Р»Р° РїРѕ ID
  */
-UserRouter.get("/api/file_id/:name", async function (req: express.Request, res: express.Response) {
-    res.send(null);
+UserRouter.get("/api/file_path/:id", async function (req: express.Request, res: express.Response) {
+    try {
+        let id = req.params.id;
+        let docID = (await TaskRepository.findOne({ where: { id: id } })).document_id;
+        let path = (await DocumentRepository.findOne({ where: { id: docID } })).file_path;
+        res.send(path);
+    } catch (e) {
+        console.error(e);
+        res.send(false);
+    }
 });
 
 /*
- * \brief Запись факта ознакомления с документом
+ * \brief Р—Р°РїРёСЃСЊ С„Р°РєС‚Р° РѕР·РЅР°РєРѕРјР»РµРЅРёСЏ СЃ РґРѕРєСѓРјРµРЅС‚РѕРј
  */
 UserRouter.get("/api/file_read/:id", async function (req: express.Request, res: express.Response) {
+    try {
+        let id : number = Number(req.params.id);
+        ReadFactRepository.create({ task_id: id, read_date: new Date() });
+        res.send(true);
+    } catch (e) {
+        console.error(e);
+        res.send(false);
+    }
+});
+
+/*
+ * \brief РџРѕР»СѓС‡РµРЅРёРµ СЃРїРёСЃРєР° РґРѕРєСѓРјРµРЅС‚РѕРІ, СЃ РєРѕС‚РѕСЂС‹РјРё РЅРµРѕР±С…РѕРґРёРјРѕ РѕР·РЅР°РєРѕРјРёС‚СЊСЃСЏ
+ */
+UserRouter.get("/api/must_read/", RoleCheckMW('worker'), async function (req: express.Request, res: express.Response) {
+    try {
+        let tasks: TaskDetails[] = [];
+        let list: TaskRepository[] = await TaskRepository.findAll({
+            where: { recipient: 1 }
+        });
+        for (let i: number = 0; i < list.length; i++) {
+            let isRead: ReadFactRepository = await ReadFactRepository.findOne({ where: { task_id: list[i].id } });
+            let isResend: ResendFactRepository = await ResendFactRepository.findOne({ where: { task_id: list[i].id } });
+            if ((isRead === null && list[i].must_read) || (isResend === null && list[i].must_resend)) {
+                let curTask: TaskDetails = new TaskDetails();
+                await curTask.Init(list[i]);
+                tasks.push(curTask);
+            }
+        }
+        res.send(tasks);
+    } catch (e) {
+        console.error(e);
+        res.send(false);
+    }
+});
+
+
+/*
+ * \brief РџРѕР»СѓС‡РµРЅРёРµ СЃРїРёСЃРєР° РґРѕРєСѓРјРµРЅС‚РѕРІ, СЃ РєРѕС‚РѕСЂС‹РјРё РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ РѕР·РЅР°РєРѕРјРёР»СЃСЏ СЂР°РЅРµРµ
+ */
+UserRouter.get("/api/archive/", async function (req: express.Request, res: express.Response) {
     res.send(false);
 });
 
