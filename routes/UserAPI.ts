@@ -5,8 +5,9 @@ import { TaskRepository } from '../services/repositories/documents/TaskRepositor
 import { ResendFactRepository } from '../services/repositories/documents/ResendFactRepository';
 import { TaskDetails } from '../models/TaskDetails';
 import RoleCheckMW from '../middlewares/RoleCheckMW';
-import { hostname } from 'os';
 import { DocumentRepository } from '../services/repositories/documents/DocumentRepository';
+import { UserData } from '../models/UserData';
+import { getUser } from '../middlewares/RoleCheckMW';
 const UserRouter = express.Router();
 
 /*
@@ -61,15 +62,16 @@ UserRouter.get("/api/file_read/:id", async function (req: express.Request, res: 
 UserRouter.get("/api/must_read/", RoleCheckMW('worker'), async function (req: express.Request, res: express.Response) {
     try {
         let tasks: TaskDetails[] = [];
+        let user: UserData = getUser(req);
         let list: TaskRepository[] = await TaskRepository.findAll({
-            where: { recipient: 1 }
+            where: { recipient: user.id }
         });
         for (let i: number = 0; i < list.length; i++) {
             let isRead: ReadFactRepository = await ReadFactRepository.findOne({ where: { task_id: list[i].id } });
             let isResend: ResendFactRepository = await ResendFactRepository.findOne({ where: { task_id: list[i].id } });
             if ((isRead === null && list[i].must_read) || (isResend === null && list[i].must_resend)) {
                 let curTask: TaskDetails = new TaskDetails();
-                await curTask.Init(list[i]);
+                await curTask.InitActive(list[i]);
                 tasks.push(curTask);
             }
         }
@@ -84,8 +86,27 @@ UserRouter.get("/api/must_read/", RoleCheckMW('worker'), async function (req: ex
 /*
  * \brief Получение списка документов, с которыми пользователь ознакомился ранее
  */
-UserRouter.get("/api/archive/", async function (req: express.Request, res: express.Response) {
-    res.send(false);
+UserRouter.get("/api/archive/", RoleCheckMW('worker'), async function (req: express.Request, res: express.Response) {
+    try {
+        let tasks: TaskDetails[] = [];
+        let user: UserData = getUser(req);
+        let list: TaskRepository[] = await TaskRepository.findAll({
+            where: { recipient: user.id }
+        });
+        for (let i: number = 0; i < list.length; i++) {
+            let isRead: ReadFactRepository = await ReadFactRepository.findOne({ where: { task_id: list[i].id } });
+            let isResend: ResendFactRepository = await ResendFactRepository.findOne({ where: { task_id: list[i].id } });
+            if (isRead || isResend) {
+                let curTask: TaskDetails = new TaskDetails();
+                await curTask.InitArchive(list[i]);
+                tasks.push(curTask);
+            }
+        }
+        res.send(tasks);
+    } catch (e) {
+        console.error(e);
+        res.send(false);
+    }
 });
 
 export default UserRouter;

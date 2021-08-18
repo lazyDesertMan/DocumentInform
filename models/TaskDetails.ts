@@ -17,9 +17,9 @@ class TaskDetails {
     public mustResend: boolean;  //!< Требуется ли переслать документ
 
     /*
-     * \brief Поиск детальной информации по заданию и сохранение в текущий экземпляр
+     * \brief Поиск детальной информации по активному заданию и сохранение в текущий экземпляр
      */
-    public async Init(task: TaskRepository) {
+    public async InitActive(task: TaskRepository) {
         this.id = task.id;
         this.document = (await DocumentRepository.findOne({ where: { id: task.document_id } })).name;
         this.sender = (await UserRepository.findOne({ where: { id: task.sender } })).name;
@@ -27,8 +27,24 @@ class TaskDetails {
         this.deadline = task.deadline;
         let isRead: ReadFactRepository = await ReadFactRepository.findOne({ where: { task_id: task.id } });
         let isResend: ResendFactRepository = await ResendFactRepository.findOne({ where: { task_id: task.id } });
-        this.mustRead = !isRead && task.must_read;
-        this.mustResend = !isResend && task.must_resend;
+        this.mustRead = isRead === null && task.must_read;
+        this.mustResend = isResend === null && task.must_resend;
+        return this;
+    }
+
+    /*
+     * \brief Поиск детальной информации по выполненному заданию и сохранение в текущий экземпляр
+     */
+    public async InitArchive(task: TaskRepository) {
+        this.id = task.id;
+        this.document = (await DocumentRepository.findOne({ where: { id: task.document_id } })).name;
+        this.sender = (await UserRepository.findOne({ where: { id: task.sender } })).name;
+        let isRead: ReadFactRepository = await ReadFactRepository.findOne({ where: { task_id: task.id } });
+        let isResend: ResendFactRepository = await ResendFactRepository.findOne({ where: { task_id: task.id } });
+        this.mustRead = isRead != null && task.must_read;
+        this.mustResend = isResend != null && task.must_resend;
+        this.startDate = isRead?.read_date;
+        this.deadline = isResend?.resend_date;
         return this;
     }
 }
