@@ -5,6 +5,7 @@ import * as path from 'path';
 import * as console from 'console';
 import auth from './routes/AuthAPI';
 import user from './routes/UserAPI';
+import report from './routes/ReportAPI';
 import { DBContext } from './services/DBContext';
 import { GroupHierarchyRepository } from './services/repositories/groups/GroupHierarchyRepository';
 import { GroupRepository } from './services/repositories/groups/GroupRepository';
@@ -26,6 +27,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use('/', auth);
 app.use('/', user);
+app.use('/', report);
 
 app.use(async function (req, res, next) {
     console.warn((new Date()).toLocaleString('ru') + ': Unknow address \'' + req.url + '\'');
