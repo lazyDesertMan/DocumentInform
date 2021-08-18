@@ -4,7 +4,7 @@ import auth from '../services/AuthService';
 import { UserData } from '../models/UserData';
 
 /*
- * \brief Получение токена из cookie
+ * \brief РџРѕР»СѓС‡РµРЅРёРµ С‚РѕРєРµРЅР° РёР· cookie
  */
 function getToken (req: express.Request) {
     if (req.cookies.usr != undefined) {
@@ -18,7 +18,7 @@ function getUser(req: express.Request) {
 }
 
 /*
- * \brief Проверка, что текущий пользователь находится в указанной роли
+ * \brief РџСЂРѕРІРµСЂРєР°, С‡С‚Рѕ С‚РµРєСѓС‰РёР№ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ РЅР°С…РѕРґРёС‚СЃСЏ РІ СѓРєР°Р·Р°РЅРЅРѕР№ СЂРѕР»Рё
  */
 export default (requiredRole) => {
     return (req: express.Request, res: express.Response, next: express.NextFunction) => {
