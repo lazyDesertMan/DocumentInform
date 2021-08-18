@@ -31,4 +31,30 @@ ReportRouter.get("/api/reports/active_tasks/:user_id", async function (req: expr
     }
 });
 
+/*
+ * \brief Получение списка выполненных пользователем заданий
+ */
+ReportRouter.get("/api/reports/completed_tasks/:user_id", async function (req: express.Request, res: express.Response) {
+    try {
+        const userID = req.params.user_id;
+        let tasks: TaskDetails[] = [];
+        let list: TaskRepository[] = await TaskRepository.findAll({
+            where: { recipient: userID }
+        });
+        for (let i: number = 0; i < list.length; i++) {
+            let isRead: ReadFactRepository = await ReadFactRepository.findOne({ where: { task_id: list[i].id } });
+            let isResend: ResendFactRepository = await ResendFactRepository.findOne({ where: { task_id: list[i].id } });
+            if (isRead || isResend) {
+                let curTask: TaskDetails = new TaskDetails();
+                await curTask.InitArchive(list[i]);
+                tasks.push(curTask);
+            }
+        }
+        res.send(tasks);
+    } catch (e) {
+        console.error(e);
+        res.send(false);
+    }
+});
+
 export default ReportRouter;
