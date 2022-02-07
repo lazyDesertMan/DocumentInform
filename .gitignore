@@ -1,11 +1,4 @@
-**/bin
-**/obj
+**/.vscode
 **/.vs
 **/node_modules
-**/public
-*.user
-*proj
-*.sln
-*.js
-*.js.map
-package-lock.json
+api/build
