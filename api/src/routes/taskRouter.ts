@@ -18,7 +18,7 @@ taskRouter.get("/active", roleCheckMiddleware([Roles.ROLE_WORKER, Roles.ROLE_LEA
     try {
         let user : UserData = await userContrl.getActiveUser(req);
         let tasks: Task[] = await taskContrl.activeTaskList(user);
-        res.send("<pre>" + JSON.stringify(tasks, null, 2) + "</pre>");
+        res.send(JSON.stringify(tasks, null, 2));
     } catch (e) {
         console.error(e);
         res.send("");
@@ -29,7 +29,7 @@ taskRouter.get("/complete", roleCheckMiddleware([Roles.ROLE_WORKER, Roles.ROLE_L
     try {
         let user : UserData = await userContrl.getActiveUser(req);
         let tasks: CompleteFact[] = await taskContrl.completeTaskList(user);
-        res.send("<pre>" + JSON.stringify(tasks, null, 2) + "</pre>");
+        res.send(JSON.stringify(tasks, null, 2));
     } catch (e) {
         console.error(e);
         res.send();
