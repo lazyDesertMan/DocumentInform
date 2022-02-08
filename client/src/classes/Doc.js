@@ -8,7 +8,7 @@ export default class Doc {
     setDoc(data) {
         this._data = data
     }
-    get data() {
+    get isDoc() {
         return this._data
     }
 }

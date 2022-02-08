@@ -13,7 +13,7 @@ const Login = observer(() => {
     const [password, setPassword] = useState('')
     const signIn = async () =>{
         try{
-            let data = await authorization(login, password)
+            let data = authorization(login, password)
             if(data === false){
                 navigate(HOME_ROUTE);
             }else if(data === true){

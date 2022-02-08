@@ -4,7 +4,7 @@ import { Button, Form, Stack } from "react-bootstrap";
 import {documents } from "../http/userAPI";
 import Doc from '../classes/Doc';
 
-const Document = () => {
+const Document = async () => {
     //const navigate = useNavigate();
     let docs = new Doc();
     const currDate = new Date().toLocaleDateString();
@@ -14,7 +14,7 @@ const Document = () => {
             docs.setDoc(documents()); 
         }catch(e){console.log(e)}
     }
-    getDoc();
+    await getDoc();
     return(
         <>
             <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
@@ -31,13 +31,13 @@ const Document = () => {
             <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
                 <Form style={{width: '60%', marginTop: '1%'}}>
                     <div class="list-group list-group-flush border-bottom scrollarea">
-                        {Array.from({ length: docs.getDoc().length }).map((_, idx) => (
+                        {Array.from({ length: docs.isDoc().length }).map((_, idx) => (
                             <a href="#" class="list-group-item list-group-item-action py-3 lh-tight">
                                 <div class="d-flex w-100 align-items-center justify-content-between">
-                                <strong class="mb-1">{docs.getDoc().name}</strong>
-                                <small>{docs.getDoc().effectiveDate}</small>
+                                <strong class="mb-1">{docs.isDoc().name}</strong>
+                                <small>{docs.isDoc().effectiveDate}</small>
                                 </div>
-                                <div class="col-10 mb-1 small">{docs.getDoc().description}</div>
+                                <div class="col-10 mb-1 small">{docs.isDoc().description}</div>
                             </a>
                         ))}
                     </div>
