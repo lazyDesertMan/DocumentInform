@@ -1,20 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 //import { useNavigate } from "react-router-dom";
 import { Button, Form, Stack } from "react-bootstrap";
 import {documents } from "../http/userAPI";
 import Doc from '../classes/Doc';
 
-const Document = async () => {
-    //const navigate = useNavigate();
+async function getDoc() {
     let docs = new Doc();
+    try{
+        let data = await documents()
+        docs.setDoc(data);
+        return docs;
+    } catch(e) {
+        console.log(e);
+        return null;
+    }
+}
+
+const Document = () => {
+    //const navigate = useNavigate();
     const currDate = new Date().toLocaleDateString();
     const currTime = new Date().toLocaleTimeString();
-    const getDoc = async () => {
-        try{
-            docs.setDoc(documents()); 
-        }catch(e){console.log(e)}
-    }
-    await getDoc();
+    let docs = null;
+    getDoc().then(response => {
+        console.log("Loaded"); 
+        docs = response.list;
+    })
     return(
         <>
             <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
@@ -30,14 +40,14 @@ const Document = async () => {
             </div>
             <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
                 <Form style={{width: '60%', marginTop: '1%'}}>
-                    <div class="list-group list-group-flush border-bottom scrollarea">
-                        {Array.from({ length: docs.isDoc().length }).map((_, idx) => (
-                            <a href="#" class="list-group-item list-group-item-action py-3 lh-tight">
-                                <div class="d-flex w-100 align-items-center justify-content-between">
-                                <strong class="mb-1">{docs.isDoc().name}</strong>
-                                <small>{docs.isDoc().effectiveDate}</small>
+                    <div className="list-group list-group-flush border-bottom scrollarea">
+                        {Array.from({ length: docs.list.length }).map((_, idx) => (
+                            <a href="#" className="list-group-item list-group-item-action py-3 lh-tight">
+                                <div className="d-flex w-100 align-items-center justify-content-between">
+                                <strong className="mb-1">{docs.list[idx].name}</strong>
+                                <small>{docs.list[idx].effectiveDate}</small>
                                 </div>
-                                <div class="col-10 mb-1 small">{docs.isDoc().description}</div>
+                                <div className="col-10 mb-1 small">{docs.list[idx].description}</div>
                             </a>
                         ))}
                     </div>

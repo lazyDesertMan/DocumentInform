@@ -5,10 +5,12 @@ export default class Doc {
         this._data = {}
         makeAutoObservable(this)
     }
+
     setDoc(data) {
         this._data = data
     }
-    get isDoc() {
+    
+    get list() {
         return this._data
     }
 }
