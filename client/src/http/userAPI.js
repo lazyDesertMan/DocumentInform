@@ -10,11 +10,10 @@ export const authorization = async (login, password) => {
         },
         body: JSON.stringify(data),
     });
-    try {
-        return await (await fetch(request)).json()
-    } catch {
-        return null
-    }
+    fetch(request).then(async (response) => {
+        let content = await response.json()
+        return content
+    }).catch(() => console.log("Error"))
 }
 export const documents = async () => {
     const request = new Request('http://localhost:1337/api/document/list', {
@@ -24,11 +23,6 @@ export const documents = async () => {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(),
     });
-    try {
-        return await (await fetch(request)).json()
-    } catch {
-        return null
-    }
+    return await (await fetch(request)).json
 }
