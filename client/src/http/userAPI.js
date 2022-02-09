@@ -16,8 +16,23 @@ export const authorization = async (login, password) => {
         return null
     }
 }
-export const documents = async () => {
+export const GetDocuments = async () => {
     const request = new Request('http://localhost:1337/api/document/list', {
+        mode: 'cors',
+        method: "GET",
+        credentials: "include",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    });
+    try {
+        return await (await fetch(request)).json()
+    } catch {
+        return null
+    }
+}
+export const GetTasks = async () => {
+    const request = new Request('http://localhost:1337/api/task/list', {
         mode: 'cors',
         method: "GET",
         credentials: "include",

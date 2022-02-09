@@ -21,13 +21,14 @@ export const authRoutes = [
         path: COMPLETED_ROUTE ,
         Component: Completed
     },
-    {
-        path: TASKS_ROUTE ,
-        Component: Tasks
-    },
+    
     {
         path: HOME_ROUTE ,
         Component: Home
+    },
+    {
+        path: ERROR_ROUTE ,
+        Component: Error
     },
 ]
 
@@ -49,12 +50,12 @@ export const adminRoutes = [
         Component: Completed
     },
     {
-        path: TASKS_ROUTE ,
-        Component: Tasks
-    },
-    {
         path: HOME_ROUTE ,
         Component: Home
+    },
+    {
+        path: ERROR_ROUTE ,
+        Component: Error
     },
 ]
 
@@ -70,5 +71,9 @@ export const publicRoutes = [
     {
         path: ERROR_ROUTE ,
         Component: Error
+    },
+    {
+        path: TASKS_ROUTE ,
+        Component: Tasks
     },
 ]
