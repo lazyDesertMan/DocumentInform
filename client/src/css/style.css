@@ -7,3 +7,55 @@
 .home2{
     margin-left: -4%;
 }
+#myInput {
+    background-position: 10px 12px; /* Расположите значок поиска */
+    background-repeat: no-repeat; /* Не повторяйте изображение значка */
+    width: 100%; /* Полная ширина */
+    font-size: 16px; /* Увеличить размер шрифта */
+    padding: 12px 20px 12px 40px; /* Добавить немного отступов */
+    border: 1px solid #ddd; /* Добавить серую границу */
+    margin-bottom: 12px; /* Добавить некоторое пространство под входом */
+}
+  
+#myUL {
+    /* Удалить стиль списка по умолчанию */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+  
+#myUL li a {
+    border: 1px solid #ddd; /* Добавить границу для всех ссылок */
+    margin-top: -1px; /* Предотвращение двойных границ */
+    background-color: #f6f6f6; /* Серый цвет фона */
+    padding: 12px; /* Добавить немного отступов */
+    text-decoration: none; /* Удалить подчеркивание текста по умолчанию */
+    font-size: 18px; /* Увеличьте размер шрифта */
+    color: black; /* Добавить черный цвет текста */
+    display: block; /* Сделайте его в элемент блока, чтобы заполнить весь список */
+}
+  
+#myUL li a:hover:not(.header) {
+    background-color: #eee; /* Добавить эффект наведения на все ссылки, кроме заголовков */
+}
+/* стили при наведении курсора на checkbox */
+.custom-checkbox:not(:disabled):not(:checked)+label:hover::before {
+    border-color: #b3d7ff;
+}
+/* стили для активного состояния чекбокса (при нажатии на него) */
+.custom-checkbox:not(:disabled):active+label::before {
+    background-color: #b3d7ff;
+    border-color: #b3d7ff;
+}
+/* стили для чекбокса, находящегося в фокусе */
+.custom-checkbox:focus+label::before {
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+/* стили для чекбокса, находящегося в фокусе и не находящегося в состоянии checked */
+.custom-checkbox:focus:not(:checked)+label::before {
+    border-color: #80bdff;
+}
+/* стили для чекбокса, находящегося в состоянии disabled */
+.custom-checkbox:disabled+label::before {
+    background-color: #e9ecef;
+}
