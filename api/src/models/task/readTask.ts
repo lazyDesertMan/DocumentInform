@@ -5,6 +5,7 @@ import { Task, TaskType } from "./task";
  */
 class ReadTask implements Task {
     public readonly ID         : number;    //!< ID задания
+    public readonly document   : string;    //!< Название документа
     public readonly documentID : number;    //!< ID документа, связанного с заданием
     public readonly senderID   : number;    //!< ID должности сотрудника, выдавшего задание
     public readonly recipient  : number;    //!< ID сотрудника, который должен ознакомиться с документом
@@ -12,8 +13,9 @@ class ReadTask implements Task {
     public readonly deadline   : Date;      //!< Крайний срок выполнения задания
     public readonly type       : TaskType;  //!< Тип задания
 
-    constructor (id : number, doc : number, sender : number, recip : number, start : Date, end : Date) {
+    constructor (id : number, name : string, doc : number, sender : number, recip : number, start : Date, end : Date) {
         this.ID = id;
+        this.document = name;
         this.documentID = doc;
         this.senderID = sender;
         this.recipient = recip;

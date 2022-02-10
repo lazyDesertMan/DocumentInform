@@ -11,6 +11,7 @@ enum TaskType {
  */
 interface Task {
     ID         : number;    //!< ID задания
+    document   : string     //!< Название документа
     documentID : number;    //!< ID документа, связанного с заданием
     senderID   : number;    //!< ID должности сотрудника, выдавшего задание
     startDate  : Date;      //!< Дата выдачи задания
