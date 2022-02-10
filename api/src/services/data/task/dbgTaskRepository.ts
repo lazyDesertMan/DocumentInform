@@ -5,9 +5,15 @@ import ITaskRepository from "./iTaskRepository";
 
 
 class DbgTaskRepository implements ITaskRepository {
-    private static activeTasks : Task[] = [];
-    private static completedTasks : CompleteFact[] = [];
-    private static currentIdx : number = 0;
+    private static activeTasks : Task[] = [
+        new ReadTask(1, 1, 2, 1, new Date(0), new Date(10)),
+        new ReadTask(2, 1, 2, 1, new Date(10), new Date(100000))
+    ];
+    private static completedTasks : CompleteFact[] = [
+        new CompleteFact(new Date(100), new ReadTask(3, 2, 2, 1, new Date(0), new Date(1000))),
+        new CompleteFact(new Date(100), new ReadTask(4, 2, 3, 2, new Date(0), new Date(1000)))
+    ];
+    private static currentIdx : number = DbgTaskRepository.activeTasks.length + DbgTaskRepository.completedTasks.length + 1;
 
     public list(userID: number): Task[] {
         let tasks : Task[] = [];
