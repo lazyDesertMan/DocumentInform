@@ -17,7 +17,7 @@ export const authorization = async (login, password) => {
     }
 }
 export const GetDocuments = async () => {
-    const request = new Request('http://localhost:1337/api/document/list', {
+    const request = new Request('http://localhost:1337/api/document/allowed', {
         mode: 'cors',
         method: "GET",
         credentials: "include",
@@ -32,7 +32,7 @@ export const GetDocuments = async () => {
     }
 }
 export const GetTasks = async () => {
-    const request = new Request('http://localhost:1337/api/task/list', {
+    const request = new Request('http://localhost:1337/api/task/active', {
         mode: 'cors',
         method: "GET",
         credentials: "include",

@@ -28,7 +28,6 @@ const Document = () => {
 };
 
 const DocumentListPlace = observer(() => {
-
     return(
         <>
             <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">

@@ -33,14 +33,15 @@ async function loadTasks() {
         return null;
     }
 }
-// Вряд ли тут так.. response один, а запроса два.. Хотя.. хз.. Чекни
+// FIXME: Вряд ли тут так.. response один, а запроса два.. Хотя.. хз.. Чекни
+// 
 const Tasks = () => {
-    /*load().then(response => {
+    loadDocs().then(response => {
         docs.list = response.list;
     })
-    load().then(response => {
+    loadTasks().then(response => {
         tasks.list = response.list;
-    })*/
+    })
 
     return(<TaskListPlace/>)
 };
@@ -50,16 +51,16 @@ const TaskListPlace = observer(() => {
     let listDocID = {};
     let listDoc = {};
     // Получение нужных ID доков из заданий
-    const getListDocID = () =>{
+    /*const getListDocID = () =>{
         if(familiarize){
             for(let i = 0; i < tasks.list.length; i++){
-                if(tasks.list[i].type === "Ознакомиться")
+                if(tasks.list[i].type === 1)
                     listDocID += tasks.list[i].documentID;  // Присваивание в массив?
             }
         }
         if(send){
             for(let i = 0; i < tasks.list.length; i++){
-                if(tasks.list[i].type === "Переслать")
+                if(tasks.list[i].type === 2)
                     listDocID += tasks.list[i].documentID;  // Присваивание в массив?
             }
         }
@@ -72,7 +73,10 @@ const TaskListPlace = observer(() => {
                     listDoc += docs.list[i];                // Присваивание в json?
             }
         }
-    }
+    }*/
+
+    console.log(tasks.list);
+
     return(
         <>
             <div>
@@ -106,8 +110,26 @@ const TaskListPlace = observer(() => {
                         :
                             <p>Ни то, ни другое</p>
                         }
-                        {/* Это даже не понадобиться скорее всего, раз я в функциях все фильтрую уже, 
-                            то тут можно просто вывести документы */}
+                        {
+                        // TODO: Это даже не понадобиться скорее всего, раз я
+                         // в функциях все фильтрую уже, то тут можно просто вывести документы
+                        }
+                    </div>
+                </div>
+            </div>
+            <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <div style={{width: '60%', marginTop: '1%'}}>
+                    <div className="list-group list-group-flush border-bottom scrollarea">
+                        {Array.from({ length: tasks.list.length }).map((_, idx) => (
+                            <a id="item" key={tasks.list[idx].ID} href="#" className="list-group-item list-group-item-action py-3 lh-tight">
+                                <div className="d-flex w-100 align-items-center justify-content-between">
+                                <strong className="mb-1">{docs.list[idx].name}</strong>
+                                <small>{}</small>
+                                </div>
+                                <div className="col-10 mb-1 small">Выдано {tasks.list[idx].startDate}</div>
+                                <div className="col-10 mb-1 small">Выполнить до {tasks.list[idx].deadline}</div>
+                            </a>
+                        ))}
                     </div>
                 </div>
             </div>
