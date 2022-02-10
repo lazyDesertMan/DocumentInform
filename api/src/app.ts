@@ -14,7 +14,8 @@ const app = express();
 const server = http.createServer(app);
 
 let corsOptions : cors.CorsOptions = {
-    origin: 'http://localhost:3000',
+    //origin: 'http://localhost:3000',
+    origin: function(origin, callback) { callback(null, true) },
     credentials: true,
     optionsSuccessStatus: 200
 }
