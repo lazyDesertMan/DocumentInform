@@ -42,9 +42,9 @@ taskRouter.post("/add", roleCheckMiddleware([Roles.ROLE_LEADER, Roles.ROLE_DIREC
         let tsk : Task;
         let type : TaskType = Number(req.body.type);
         if (type === TaskType.READ_TASK_TYPE)
-            tsk = new ReadTask(0, Number(req.body.document), Number(user.id), Number(req.body.recipient), new Date(req.body.start), new Date(req.body.end));
+            tsk = new ReadTask(0, "", Number(req.body.document), Number(user.id), Number(req.body.recipient), new Date(req.body.start), new Date(req.body.end));
         else if (type === TaskType.RESEND_TASK_TYPE)
-            tsk = new ResendTask(0, Number(req.body.document), Number(user.id), Number(req.body.recipient), new Date(req.body.start), new Date(req.body.end));
+            tsk = new ResendTask(0, "", Number(req.body.document), Number(user.id), Number(req.body.recipient), new Date(req.body.start), new Date(req.body.end));
         else
             throw new Error("Неизвестный тип задания: " + type);
         tsk.type = type;
