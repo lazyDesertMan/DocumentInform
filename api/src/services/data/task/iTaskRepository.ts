@@ -9,6 +9,7 @@ interface ITaskRepository {
     add(tsk : Task) : number;
     remove(id : number) : boolean;
     setCompleted(id : number) : void;
+    allowedDocs(userID : number) : number[];
 }
 
 export default ITaskRepository;

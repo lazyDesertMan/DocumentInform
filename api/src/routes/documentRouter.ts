@@ -8,9 +8,9 @@ const documentRouter = express.Router();
 const documentController : DocumentController = new DocumentController();
 const userController : UserController = new UserController();
 
-documentRouter.get("/list", async (req: express.Request, res: express.Response) => {
+documentRouter.get("/allowed", async (req: express.Request, res: express.Response) => {
     let user : UserData = await userController.getActiveUser(req);
-    let docs: Document[] = await documentController.list(user);
+    let docs: Document[] = await documentController.userDocs(user);
     res.send(JSON.stringify(docs, null, 2));
 });
 
