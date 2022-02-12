@@ -1,4 +1,4 @@
-import { Task } from "./task";
+import { ITask } from "./iTask";
 
 
 /**
@@ -6,9 +6,9 @@ import { Task } from "./task";
  */
 class CompleteFact {
     public readonly completeDate  : Date;  //!< Дата выполнения задания
-    public readonly completedTask : Task;  //!< Данные выполненого задании
+    public readonly completedTask : ITask;  //!< Данные выполненого задании
 
-    constructor (date : Date, compTask : Task) {
+    constructor (date : Date, compTask : ITask) {
         this.completeDate = date;
         this.completedTask = compTask;
     }

@@ -1,12 +1,12 @@
 import { CompleteFact } from "../../../models/task/completeFact";
-import { Task } from "../../../models/task/task";
+import { ITask } from "../../../models/task/iTask";
 
 interface ITaskRepository {
-    list(userID : number) : Task[];
-    activeList(userID : number) : Task[];
+    list(userID : number) : ITask[];
+    activeList(userID : number) : ITask[];
     completeList(userID : number) : CompleteFact[];
-    findByID(id : number) : Task;
-    add(tsk : Task) : number;
+    findByID(id : number) : ITask;
+    add(tsk : ITask) : number;
     remove(id : number) : boolean;
     setCompleted(id : number) : void;
     allowedDocs(userID : number) : number[];

@@ -1,5 +1,5 @@
 import { CompleteFact } from "../models/task/completeFact";
-import { Task } from "../models/task/task";
+import { ITask } from "../models/task/iTask";
 import { UserData } from "../models/userData";
 import ITaskRepository from "../services/data/task/iTaskRepository";
 import DbgTaskRepository from "../services/data/task/dbgTaskRepository";
@@ -23,7 +23,7 @@ class TaskController {
      * @param user Пользователь, для которого ведётся формирование списка активных заданий
      * @returns Список активных заданий
      */
-    public activeTaskList (user : UserData): Task[] {
+    public activeTaskList (user : UserData): ITask[] {
         return this.taskRepository.activeList(user.id);
     }
 
@@ -36,7 +36,7 @@ class TaskController {
         return this.taskRepository.completeList(user.id);
     }
 
-    public addTask (tsk : Task) : number {
+    public addTask (tsk : ITask) : number {
         let doc = this.documentRepository.findOne(tsk.documentID);
         if (!doc)
             throw("Документ не существует")
