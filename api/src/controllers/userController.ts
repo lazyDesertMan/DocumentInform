@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { CookieData } from '../models/cookieData';
 import { UserData } from '../models/userData';
-import dbgUserRepository from '../services/data/user/dbgUserRepository';
+import DbgUserRepository from '../services/data/user/dbgUserRepository';
 import IUserRepository from '../services/data/user/iUserRepository';
 import { jwtManager } from '../services/jwtManager';
 import passwordManager from '../services/passwordManager';
@@ -10,7 +10,7 @@ export default class UserController {
     protected userRepository : IUserRepository;
 
     constructor() {
-        this.userRepository = new dbgUserRepository();
+        this.userRepository = new DbgUserRepository();
     }
 
     protected getToken (req: Request) : string {
