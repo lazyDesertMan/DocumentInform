@@ -47,4 +47,3 @@ export default (requiredRole : string[]) => {
 export {
     getUser
 }
-
