@@ -1,12 +1,11 @@
 import { CompleteFact } from "../../../models/task/completeFact";
 import { ReadTask } from "../../../models/task/readTask";
-import { Task, TaskType } from "../../../models/task/task";
-import IDocumentRepository from "../document/iDocumentRepository";
+import { ITask, TaskType } from "../../../models/task/iTask";
 import ITaskRepository from "./iTaskRepository";
 
 
 class DbgTaskRepository implements ITaskRepository {
-    private static activeTasks : Task[] = [
+    private static activeTasks : ITask[] = [
         new ReadTask(1, "doc 1", 1, 2, 1, new Date(0), new Date(10)),
         new ReadTask(2, "doc 2", 2, 2, 1, new Date(10), new Date(100000))
     ];
@@ -16,8 +15,8 @@ class DbgTaskRepository implements ITaskRepository {
     ];
     private static currentIdx : number = DbgTaskRepository.activeTasks.length + DbgTaskRepository.completedTasks.length + 1;
 
-    public list(userID: number): Task[] {
-        let tasks : Task[] = [];
+    public list(userID: number): ITask[] {
+        let tasks : ITask[] = [];
         for (let idx : number = 0; idx < DbgTaskRepository.activeTasks.length; idx++)
             if (DbgTaskRepository.activeTasks[idx].type == TaskType.READ_TASK_TYPE
                 && (DbgTaskRepository.activeTasks[idx] as ReadTask).recipient == userID)
@@ -29,8 +28,8 @@ class DbgTaskRepository implements ITaskRepository {
         return tasks;
     }
 
-    public activeList(userID: number): Task[] {
-        let tasks : Task[] = [];
+    public activeList(userID: number): ITask[] {
+        let tasks : ITask[] = [];
         for (let idx : number = 0; idx < DbgTaskRepository.activeTasks.length; idx++)
             if (DbgTaskRepository.activeTasks[idx].type == TaskType.READ_TASK_TYPE
                 && (DbgTaskRepository.activeTasks[idx] as ReadTask).recipient == userID)
@@ -47,7 +46,7 @@ class DbgTaskRepository implements ITaskRepository {
         return tasks;
     }
     
-    public findByID(id: number): Task {
+    public findByID(id: number): ITask {
         for (let idx : number = 0; idx < DbgTaskRepository.activeTasks.length; idx++)
             if (DbgTaskRepository.activeTasks[idx].ID == id)
                 return DbgTaskRepository.activeTasks[idx];
@@ -57,7 +56,7 @@ class DbgTaskRepository implements ITaskRepository {
         return null;
     }
 
-    public add(tsk: Task): number {
+    public add(tsk: ITask): number {
         tsk.ID = DbgTaskRepository.currentIdx++;
         DbgTaskRepository.activeTasks.push(tsk);
         return DbgTaskRepository.currentIdx;

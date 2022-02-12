@@ -1,9 +1,9 @@
-import { Task, TaskType } from "./task";
+import { ITask, TaskType } from "./iTask";
 
 /**
  * Задание на пересылку документа
  */
-class ResendTask implements Task {
+class ResendTask implements ITask {
     public readonly ID         : number;    //!< ID задания
     public readonly document   : string;    //!< Название документа
     public readonly documentID : number;    //!< ID документа, связанного с заданием
