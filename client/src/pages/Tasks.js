@@ -15,21 +15,25 @@ const Tasks = () => {
         let taskList = await GetTasks();
         let filtred = [];
         if (familiarize || send) {
+            console.log("fam:" + familiarize);
+            console.log("send:" + send);
             if(familiarize){
                 for(let i = 0; i < tasks.list.length; i++){
                     if(tasks.list[i].type === 1) {
                         filtred.push(taskList[i]);
                     }
                 }
+                console.log(filtred.length);
             }
             if(send){
                 for(let i = 0; i < tasks.list.length; i++){
                     if(tasks.list[i].type === 2)
                         filtred.push(taskList[i]);
                 }
+                console.log(filtred.length);
             }
         }
-        else {
+        if((familiarize && send) || (!familiarize && !send)) {
             filtred = taskList;
         }
         tasks.list = filtred;
@@ -92,7 +96,7 @@ const TaskListPlace = observer(() => {
                             <a id="item" key={tasks.list[idx].ID} href="#" className="list-group-item list-group-item-action py-3 lh-tight">
                                 <div className="d-flex w-100 align-items-center justify-content-between">
                                 <strong className="mb-1">{tasks.list[idx].name}</strong>
-                                <small>{ tasks.list[idx].type == 1 ? "Прочитать" : "Переслать" }</small>
+                                <small>{ tasks.list[idx].type === 1 ? "Прочитать" : "Переслать" }</small>
                                 </div>
                                 <div className="col-10 mb-1 small">Выдано {tasks.list[idx].startDate}</div>
                                 <div className="col-10 mb-1 small">Выполнить до {tasks.list[idx].deadline}</div>
