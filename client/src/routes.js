@@ -76,4 +76,8 @@ export const publicRoutes = [
         path: TASKS_ROUTE ,
         Component: Tasks
     },
+    {
+        path: PROFILE_ROUTE ,
+        Component: Profile
+    },
 ]

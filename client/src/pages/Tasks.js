@@ -17,14 +17,14 @@ const Tasks = () => {
         if (familiarize || send) {
             if(familiarize){
                 for(let i = 0; i < tasks.list.length; i++){
-                    if(tasks.list[i].type == 1) {
+                    if(tasks.list[i].type === 1) {
                         filtred.push(taskList[i]);
                     }
                 }
             }
             if(send){
                 for(let i = 0; i < tasks.list.length; i++){
-                    if(tasks.list[i].type == 2)
+                    if(tasks.list[i].type === 2)
                         filtred.push(taskList[i]);
                 }
             }
