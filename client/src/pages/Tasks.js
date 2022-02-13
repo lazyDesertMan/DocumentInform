@@ -12,32 +12,27 @@ const Tasks = () => {
     const [send, setSend] = useState(false);
 
     const getListDoc = async () =>{
-        let taskList = await GetTasks();
+        let unfiltredTasks = await GetTasks();
         let filtred = [];
         if (familiarize || send) {
-            console.log("fam:" + familiarize);
-            console.log("send:" + send);
             if(familiarize){
-                for(let i = 0; i < tasks.list.length; i++){
-                    if(tasks.list[i].type === 1) {
-                        filtred.push(taskList[i]);
+                for(let i = 0; i < unfiltredTasks.length; i++){
+                    if(unfiltredTasks[i].type === 1) {
+                        filtred.push(unfiltredTasks[i]);
                     }
                 }
-                console.log(filtred.length);
             }
             if(send){
-                for(let i = 0; i < tasks.list.length; i++){
-                    if(tasks.list[i].type === 2)
-                        filtred.push(taskList[i]);
+                for(let i = 0; i < unfiltredTasks.length; i++){
+                    if(unfiltredTasks[i].type === 2)
+                        filtred.push(unfiltredTasks[i]);
                 }
-                console.log(filtred.length);
             }
         }
-        if((familiarize && send) || (!familiarize && !send)) {
-            filtred = taskList;
+        else {
+            filtred = unfiltredTasks;
         }
         tasks.list = filtred;
-        console.log("IN FUNC: " + JSON.stringify(tasks) + " ---- " + JSON.stringify(filtred));
     }
 
     getListDoc();
