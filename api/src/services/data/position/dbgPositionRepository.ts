@@ -31,6 +31,10 @@ class DbgPositionRepository implements IPositionRepository {
     ]
     private static id : number = DbgPositionRepository.positions.length + 1;
 
+    private static replaces : ReplaceData[] = [
+        new ReplaceData().init(2, 1)
+    ]
+
     getUserPosition(userID: number): Position {
         for (let idx = 0; idx < DbgPositionRepository.positions.length; idx++)
             if (DbgPositionRepository.positions[idx].userID === userID)
@@ -39,7 +43,18 @@ class DbgPositionRepository implements IPositionRepository {
     }
 
     getUserReplaces(userID: number): Replace[] {
-        throw new Error("Method not implemented.");
+        let replaces : Replace[] = [];
+        for (let idx = 0; idx < DbgPositionRepository.replaces.length; idx++)
+            if (DbgPositionRepository.replaces[idx].userID === userID) {
+                let pos = this.findByID(DbgPositionRepository.replaces[idx].positionID);
+                let startDate = new Date();
+                let endDate = new Date();
+                startDate.setTime(endDate.getTime() - 100);
+                endDate.setTime(endDate.getTime() + 100);
+                let curReplace = new Replace().init(pos, startDate, endDate);
+                replaces.push(curReplace);
+            }
+        return replaces;
     }
 
     setPosition(userID: number, posID: number): void {
