@@ -9,7 +9,7 @@ enum TaskType {
 /**
  * Интерфейс для всех типов заданий
  */
-interface Task {
+interface ITask {
     ID         : number;    //!< ID задания
     document   : string     //!< Название документа
     documentID : number;    //!< ID документа, связанного с заданием
@@ -19,6 +19,6 @@ interface Task {
     type       : TaskType;  //!< Тип задания
 }
 export {
-    Task,
+    ITask,
     TaskType
 }

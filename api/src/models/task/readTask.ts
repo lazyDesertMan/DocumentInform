@@ -1,9 +1,9 @@
-import { Task, TaskType } from "./task";
+import { ITask, TaskType } from "./iTask";
 
 /**
  * Задание на чтение документа
  */
-class ReadTask implements Task {
+class ReadTask implements ITask {
     public readonly ID         : number;    //!< ID задания
     public readonly document   : string;    //!< Название документа
     public readonly documentID : number;    //!< ID документа, связанного с заданием

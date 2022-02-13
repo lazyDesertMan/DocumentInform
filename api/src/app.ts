@@ -9,6 +9,7 @@ import * as cors from 'cors';
 import authRouter from './routes/authRouter';
 import taskRouter from './routes/taskRouter';
 import documentRouter from './routes/documentRouter';
+import groupRouter from './routes/groupRouter';
 
 const app = express();
 const server = http.createServer(app);
@@ -31,6 +32,7 @@ app.use(cors(corsOptions));
 app.use('/api/login', authRouter);
 app.use('/api/task', taskRouter);
 app.use('/api/document', documentRouter);
+app.use('/api/group', groupRouter);
 
 server.listen(1337, 'localhost', async function () {
     console.info('Starting listen an port 1337\n');

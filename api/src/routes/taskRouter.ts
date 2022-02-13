@@ -3,7 +3,7 @@ import TaskController from '../controllers/taskController';
 import UserController from '../controllers/userController';
 import * as console from 'console';
 import { UserData } from '../models/userData';
-import { Task, TaskType } from '../models/task/task';
+import { ITask, TaskType } from '../models/task/iTask';
 import roleCheckMiddleware from '../middlewares/roleCheckMiddleware';
 import { Roles } from '../models/userData';
 import { CompleteFact } from '../models/task/completeFact';
@@ -17,7 +17,7 @@ const taskContrl : TaskController = new TaskController();
 taskRouter.get("/active", roleCheckMiddleware([Roles.ROLE_WORKER, Roles.ROLE_LEADER]), async (req : express.Request, res : express.Response) => {
     try {
         let user : UserData = await userContrl.getActiveUser(req);
-        let tasks: Task[] = await taskContrl.activeTaskList(user);
+        let tasks: ITask[] = await taskContrl.activeTaskList(user);
         res.send(JSON.stringify(tasks, null, 2));
     } catch (e) {
         console.error(e);
@@ -39,7 +39,7 @@ taskRouter.get("/complete", roleCheckMiddleware([Roles.ROLE_WORKER, Roles.ROLE_L
 taskRouter.post("/add", roleCheckMiddleware([Roles.ROLE_LEADER, Roles.ROLE_DIRECTOR]), async (req : express.Request, res : express.Response) => {
     try {
         let user : UserData = await userContrl.getActiveUser(req);
-        let tsk : Task;
+        let tsk : ITask;
         let type : TaskType = Number(req.body.type);
         if (type === TaskType.READ_TASK_TYPE)
             tsk = new ReadTask(0, "", Number(req.body.document), Number(user.id), Number(req.body.recipient), new Date(req.body.start), new Date(req.body.end));
