@@ -5,6 +5,8 @@ import ITaskRepository from "../services/data/task/iTaskRepository";
 import DbgTaskRepository from "../services/data/task/dbgTaskRepository";
 import IDocumentRepository from "../services/data/document/iDocumentRepository";
 import DbgDocumentRepository from "../services/data/document/dbgDocumentRepository";
+import IPositionRepository from "../services/data/position/iPositionRepository";
+import DbgPositionRepository from "../services/data/position/dbgPositionRepository";
 
 /**
  * Контроллер заданий
@@ -12,10 +14,12 @@ import DbgDocumentRepository from "../services/data/document/dbgDocumentReposito
 class TaskController {
     readonly taskRepository : ITaskRepository;
     readonly documentRepository : IDocumentRepository;
+    readonly positionRepository : IPositionRepository
 
     constructor () {
         this.taskRepository = new DbgTaskRepository();
         this.documentRepository = new DbgDocumentRepository();
+        this.positionRepository = new DbgPositionRepository();
     }
 
     /**
@@ -24,7 +28,13 @@ class TaskController {
      * @returns Список активных заданий
      */
     public activeTaskList (user : UserData): ITask[] {
-        return this.taskRepository.activeList(user.id);
+        let position = this.positionRepository.getUserPosition(user.id);
+        let replaces = this.positionRepository.getUserReplaces(user.id);
+        let tasks = this.taskRepository.userActiveTasks(user.id);
+        tasks = tasks.concat(this.taskRepository.positionActiveTasks(position.id));
+        for (let idx = 0; idx < replaces.length; idx++)
+            tasks = tasks.concat(this.taskRepository.positionActiveTasks(replaces[idx].position.id));
+        return tasks;
     }
 
     /**
@@ -33,7 +43,13 @@ class TaskController {
      * @returns Список завершённых заданий
      */
     public completeTaskList (user : UserData) : CompleteFact[] {
-        return this.taskRepository.completeList(user.id);
+        let position = this.positionRepository.getUserPosition(user.id);
+        let replaces = this.positionRepository.getUserReplaces(user.id);
+        let tasks = this.taskRepository.userCompleteTasks(user.id);
+        tasks.concat(this.taskRepository.positionCompleteTasks(position.id));
+        for (let idx = 0; idx < replaces.length; idx++)
+            tasks.concat(this.taskRepository.positionCompleteTasks(replaces[idx].position.id));
+        return tasks;
     }
 
     public addTask (tsk : ITask) : number {

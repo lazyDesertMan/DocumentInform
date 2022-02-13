@@ -92,7 +92,7 @@ const TaskListPlace = observer(() => {
                             <a id="item" key={tasks.list[idx].ID} href="#" className="list-group-item list-group-item-action py-3 lh-tight">
                                 <div className="d-flex w-100 align-items-center justify-content-between">
                                 <strong className="mb-1">{tasks.list[idx].name}</strong>
-                                <small>{}</small>
+                                <small>{ tasks.list[idx].type == 1 ? "Прочитать" : "Переслать" }</small>
                                 </div>
                                 <div className="col-10 mb-1 small">Выдано {tasks.list[idx].startDate}</div>
                                 <div className="col-10 mb-1 small">Выполнить до {tasks.list[idx].deadline}</div>
