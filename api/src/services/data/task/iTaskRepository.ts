@@ -8,7 +8,7 @@ interface ITaskRepository {
     findByID(id : number) : ITask;
     add(tsk : ITask) : number;
     remove(id : number) : boolean;
-    setCompleted(id : number) : void;
+    setCompleted(taskID : number, userID : number) : void;
     allowedDocs(userID : number) : number[];
 }
 

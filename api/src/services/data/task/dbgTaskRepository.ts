@@ -10,8 +10,8 @@ class DbgTaskRepository implements ITaskRepository {
         new ReadTask(2, "doc 2", 2, 2, 1, new Date(10), new Date(100000))
     ];
     private static completedTasks : CompleteFact[] = [
-        new CompleteFact(new Date(100), new ReadTask(3, "doc 2", 2, 2, 1, new Date(0), new Date(1000))),
-        new CompleteFact(new Date(100), new ReadTask(4, "doc 2", 2, 3, 2, new Date(0), new Date(1000)))
+        new CompleteFact(1, new Date(100), new ReadTask(3, "doc 2", 2, 2, 1, new Date(0), new Date(1000))),
+        new CompleteFact(2, new Date(100), new ReadTask(4, "doc 2", 2, 3, 2, new Date(0), new Date(1000)))
     ];
     private static currentIdx : number = DbgTaskRepository.activeTasks.length + DbgTaskRepository.completedTasks.length + 1;
 
@@ -76,10 +76,12 @@ class DbgTaskRepository implements ITaskRepository {
         return false;
     }
     
-    public setCompleted(id: number): void {
+    public setCompleted(taskID: number, userID : number): void {
         for (let idx : number = 0; idx < DbgTaskRepository.activeTasks.length; idx++)
-            if (DbgTaskRepository.activeTasks[idx].ID == id) {
-                DbgTaskRepository.completedTasks.push(new CompleteFact(new Date(), DbgTaskRepository.activeTasks.splice(idx)[0]));
+            if (DbgTaskRepository.activeTasks[idx].ID == taskID) {
+                DbgTaskRepository.completedTasks.push(
+                    new CompleteFact(userID, new Date(), DbgTaskRepository.activeTasks.splice(idx)[0])
+                );
                 return;
             }
     }
