@@ -61,19 +61,6 @@ const Tasks = () => {
                             className="form-check-input"
                             onChange={ (e)=>{ setSend(e.target.checked) }}/><span>Переслать</span></label>
                         </div>
-                        {familiarize && send ?
-                            <p>Оба чекбокса сработали</p>
-                        : familiarize && !send ?
-                            <p>Ознакомиться</p>
-                        : send && !familiarize ?
-                            <p>Переслать</p>
-                        :
-                            <p>Ни то, ни другое</p>
-                        }
-                        {
-                        // TODO: Это даже не понадобиться скорее всего, раз я
-                         // в функциях все фильтрую уже, то тут можно просто вывести документы
-                        }
                     </div>
                 </div>
             </div>      
