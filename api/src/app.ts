@@ -10,6 +10,7 @@ import authRouter from './routes/authRouter';
 import taskRouter from './routes/taskRouter';
 import documentRouter from './routes/documentRouter';
 import groupRouter from './routes/groupRouter';
+import reportRouter from './routes/reportRouter';
 
 const app = express();
 const server = http.createServer(app);
@@ -33,6 +34,7 @@ app.use('/api/login', authRouter);
 app.use('/api/task', taskRouter);
 app.use('/api/document', documentRouter);
 app.use('/api/group', groupRouter);
+app.use('/api/report', reportRouter);
 
 server.listen(1337, 'localhost', async function () {
     console.info('Starting listen an port 1337\n');
