@@ -48,7 +48,7 @@ const DocumentListPlace = observer(() => {
                 <Form style={{width: '60%', marginTop: '1%'}}>
                     <div className="list-group list-group-flush border-bottom scrollarea">
                         {Array.from({ length: docs.list.length }).map((_, idx) => (
-                            <a id="item" key={docs.list[idx].id} href="#" className="list-group-item list-group-item-action py-3 lh-tight">
+                            <a id="item" key={docs.list[idx].id} href="http://localhost:3000/pdf/1" className="list-group-item list-group-item-action py-3 lh-tight">
                                 <div className="d-flex w-100 align-items-center justify-content-between">
                                 <strong className="mb-1">{docs.list[idx].name}</strong>
                                 <small>{docs.list[idx].effectiveDate}</small>

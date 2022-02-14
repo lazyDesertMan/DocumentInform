@@ -2,11 +2,12 @@ import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Registration from "./pages/Registration";
 import Document from "./pages/Document";
-import { ERROR_ROUTE, COMPLETED_ROUTE, DOCUMENT_ROUTE, HOME_ROUTE, LOGIN_ROUTE, PROFILE_ROUTE, REGISTRATION_ROUTE, TASKS_ROUTE } from "./utils/consts";
+import { ERROR_ROUTE, COMPLETED_ROUTE, DOCUMENT_ROUTE, HOME_ROUTE, LOGIN_ROUTE, PROFILE_ROUTE, REGISTRATION_ROUTE, TASKS_ROUTE, PDF_ROUTE } from "./utils/consts";
 import Home from "./pages/Home";
 import Completed from "./pages/Completed";
 import Tasks from "./pages/Tasks";
 import Error from "./pages/Error";
+import PDF from "./pages/PDF"
 
 export const authRoutes = [
     {
@@ -29,6 +30,14 @@ export const authRoutes = [
     {
         path: ERROR_ROUTE ,
         Component: Error
+    },
+    {
+        path: TASKS_ROUTE ,
+        Component: Tasks
+    },
+    {
+        path: PDF_ROUTE + '/:id' ,
+        Component: PDF
     },
 ]
 
@@ -57,6 +66,14 @@ export const adminRoutes = [
         path: ERROR_ROUTE ,
         Component: Error
     },
+    {
+        path: TASKS_ROUTE ,
+        Component: Tasks
+    },
+    {
+        path: PDF_ROUTE + '/:id' ,
+        Component: PDF
+    },
 ]
 
 export const publicRoutes = [
@@ -71,13 +88,5 @@ export const publicRoutes = [
     {
         path: ERROR_ROUTE ,
         Component: Error
-    },
-    {
-        path: TASKS_ROUTE ,
-        Component: Tasks
-    },
-    {
-        path: PROFILE_ROUTE ,
-        Component: Profile
     },
 ]
