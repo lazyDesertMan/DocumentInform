@@ -5,7 +5,6 @@ import Document from '../models/document/document';
 import { UserData } from '../models/userData';
 
 import * as fs from 'fs';
-import { dirname } from 'path';
 
 const documentRouter = express.Router();
 const documentController : DocumentController = new DocumentController();
