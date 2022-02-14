@@ -4,12 +4,11 @@ import { ITask, TaskType } from "../../../models/task/iTask";
 import ITaskRepository from "./iTaskRepository";
 import { ResendTask } from "../../../models/task/resendTask";
 
-
 class DbgTaskRepository implements ITaskRepository {
     private static activeTasks : ITask[] = [
-        new ReadTask(1, "doc 1", 1, 2, 1, new Date(0), new Date(10)),
-        new ReadTask(2, "doc 2", 2, 2, 1, new Date(10), new Date(100000)),
-        new ResendTask(3, "doc 2", 2, 2, 2, new Date(10), new Date(100000))
+        new ReadTask(1, "doc 1", 1, 2, 1, new Date(Date.now() - 100000), new Date(Date.now() + 100000)),
+        new ReadTask(2, "doc 2", 2, 2, 1, new Date(Date.now() - 100000), new Date(Date.now() - 10)),
+        new ResendTask(3, "doc 2", 2, 2, 2, new Date(Date.now() - 100000), new Date(Date.now()))
     ];
     private static completedTasks : CompleteFact[] = [
         new CompleteFact(1, new Date(100), new ReadTask(3, "doc 2", 2, 2, 1, new Date(0), new Date(1000))),
