@@ -46,3 +46,18 @@ export const GetTasks = async () => {
         return null
     }
 }
+export const GetPDF = async (id) => {
+    const request = new Request(' localhost:1337/api/document/read?docID=' + id, {
+        mode: 'cors',
+        method: "GET",
+        credentials: "include",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    });
+    try {
+        return await (await fetch(request)).json()
+    } catch {
+        return null
+    }
+}

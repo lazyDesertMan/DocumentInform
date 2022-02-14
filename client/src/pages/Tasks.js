@@ -10,6 +10,7 @@ let tasks = new TaskList();
 const Tasks = () => {
     const [familiarize, setFamiliarize] = useState(false);
     const [send, setSend] = useState(false);
+    const [search, setSearch] = useState("");
 
     const getListDoc = async () =>{
         let unfiltredTasks = await GetTasks();
@@ -44,6 +45,8 @@ const Tasks = () => {
                 <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
                     <div><input 
                         type="text"
+                        value={search}
+                        onChange={ (e)=>{ setSearch(e.target.value)}}
                         placeholder="Поиск имен.."/>
                     </div>
                     <div>
@@ -77,7 +80,7 @@ const TaskListPlace = observer(() => {
                         {Array.from({ length: tasks.list.length }).map((_, idx) => (
                             <a id="item" key={tasks.list[idx].ID} href="#" className="list-group-item list-group-item-action py-3 lh-tight">
                                 <div className="d-flex w-100 align-items-center justify-content-between">
-                                <strong className="mb-1">{tasks.list[idx].name}</strong>
+                                <strong className="mb-1">{tasks.list[idx].document}</strong>
                                 <small>{ tasks.list[idx].type === 1 ? "Прочитать" : "Переслать" }</small>
                                 </div>
                                 <div className="col-10 mb-1 small">Выдано {tasks.list[idx].startDate}</div>
