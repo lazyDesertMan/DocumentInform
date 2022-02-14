@@ -40,4 +40,8 @@ export default class UserController {
         }
         return false;
     }
+
+    public findUserByID(userID : number) : UserData {
+        return this.userRepository.findByID(userID)
+    }
 }
