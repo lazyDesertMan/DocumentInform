@@ -4,32 +4,31 @@ import '../css/style.css';
 import TaskList from '../classes/TaskList';
 import { GetTasks, GetReport } from "../http/userAPI";
 import { observer } from "mobx-react-lite";
-import { Button, Modal, Row, Col, Container} from "react-bootstrap";
+import { Button, Modal, Row, Col, Container, Spinner} from "react-bootstrap";
 import jwtDecode from "jwt-decode";
 import Cookies from "js-cookie";
+import ReportList from "../classes/ReportList";
 
 let tasks = new TaskList();
 
-let rep = {};
+let rep = new ReportList();
+
 async function load() {
     let us = jwtDecode(Cookies.get("usr"))
-    console.log(us.cookie.user.id);
-    let tmpRep = {};
+    let repTMP = new ReportList();
     try{
         let data = await GetReport(us.cookie.user.id)
-        tmpRep = data;
-        return tmpRep;
+        repTMP.list = data;
+        return repTMP;
     } catch(e) {
         console.log(e);
         return null;
     }
 }
-const Tasks = () => {
+const Tasks = () =>{
     load().then(response => {
-        rep = response;
+        rep.list = response.list;
     })
-    console.log(JSON.stringify(rep));
-
     return(<TasksSearch/>)
 }
 const TasksSearch = observer(() => {
@@ -100,27 +99,67 @@ const Report = observer(() =>{
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    return(
+    if(rep.list === null){
+        console.log("if" + JSON.stringify(rep))
+        return <div></div>
+    }
+    else{ 
+        console.log("else" + JSON.stringify(rep))
+        return(
         <>
             <Button variant="primary" onClick={handleShow}>
                 Получить отчет
             </Button>
-
             <Modal show={show} fullscreen={true} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Отчет о заданиях</Modal.Title>
+                    <Modal.Title>Отчет о заданиях [{rep.list.userName}]</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Container>
-                        <Row>
-                            <Col xs={12} md={8}>
-                            .col-xs-12 .col-md-8
+                        <Row className="block-example border border-dark">
+                            
+                        </Row>
+                        <Row key={"MainRow"} xs={"7"}>
+                            <Col className="block-example border border-dark">
+                                Документ
                             </Col>
-                            <Col xs={6} md={4}>
-                            .col-xs-6 .col-md-4
+                            <Col className="block-example border border-dark">
+                                Дата выдачи
+                            </Col>
+                            <Col className="block-example border border-dark">
+                                Предельный срок
+                            </Col>
+                            <Col className="block-example border border-dark">
+                                Тип задания
+                            </Col>
+                            <Col className="block-example border border-dark">
+                                Статус задания
                             </Col>
                         </Row>
+                        <Row className="block-example border border-dark">
 
+                        </Row>
+                        {Array.from({ length: rep.list.tasks.length }).map((_, idx) => (
+                            <Row key={"row" + idx} xs={"7"}>
+                                <Col className="block-example border border-dark">
+                                    {rep.list.tasks[idx].task.document}
+                                </Col>
+                                <Col className="block-example border border-dark">
+                                    {rep.list.tasks[idx].task.startDate}
+                                </Col>
+                                <Col className="block-example border border-dark">
+                                    {rep.list.tasks[idx].task.deadline}
+                                </Col>
+                                <Col className="block-example border border-dark">
+                                    {rep.list.tasks[idx].task.type === 1 ? "Прочитать" : "Переслать" }
+                                </Col>
+                                <Col className="block-example border border-dark">
+                                    {rep.list.tasks[idx].status === 1 ? "Выполнено" 
+                                        :rep.list.tasks[idx].status === 2 ? "Не выполненно (без нарушений)" 
+                                        : "Не выполненно (с нарушением)"}
+                                </Col>
+                            </Row>
+                        ))}
                     </Container>
                 </Modal.Body>
                 <Modal.Footer>
@@ -133,7 +172,7 @@ const Report = observer(() =>{
                 </Modal.Footer>
             </Modal>
         </>
-    );
+    );}
 });
 const TaskListPlace = observer(() => {
     return(
