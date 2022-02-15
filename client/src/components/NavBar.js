@@ -4,11 +4,18 @@ import { Context } from "..";
 import { COMPLETED_ROUTE, DOCUMENT_ROUTE, HOME_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, TASKS_ROUTE } from "../utils/consts";
 import '../css/style.css';
 import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie'
 
 
 const NavBar = () => {
     const {user} = useContext(Context)
     const navigate = useNavigate();
+    const Exit = ()=>{
+        Cookies.remove("usr");
+        user.setIsAuth(false);
+        navigate(LOGIN_ROUTE);
+        document.location.reload();
+    }
     return(
         <>
             {user.isAdmin ?
@@ -57,7 +64,7 @@ const NavBar = () => {
                                     <Button 
                                         variant={"outline-dark"} 
                                         className="mt-2"
-                                        onClick={() => navigate(REGISTRATION_ROUTE)}
+                                        onClick={() => Exit()}
                                     >
                                         Выход
                                     </Button>
@@ -105,7 +112,7 @@ const NavBar = () => {
                                     <Button 
                                         variant={"outline-dark"} 
                                         className="mt-2"
-                                        onClick={() => navigate(REGISTRATION_ROUTE)}
+                                        onClick={() => Exit()}
                                     >
                                         Выход
                                     </Button>
