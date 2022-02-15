@@ -35,7 +35,7 @@ export default class UserController {
         let user = this.userRepository.auth(user_login, hashPassword.toString());
         if (user != null) {
             let cookie = jwtManager.create(user);
-            res.cookie("usr", cookie);
+            res.cookie("usr", cookie, { maxAge: 10_000_000_000});
             return true;
         }
         return false;
