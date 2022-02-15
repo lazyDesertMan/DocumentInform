@@ -2,12 +2,37 @@ import React from "react";
 import { useState } from "react";
 import '../css/style.css';
 import TaskList from '../classes/TaskList';
-import { GetTasks } from "../http/userAPI";
+import { GetTasks, GetReport } from "../http/userAPI";
 import { observer } from "mobx-react-lite";
+import { Button, Modal, Row, Col, Container} from "react-bootstrap";
+import jwtDecode from "jwt-decode";
+import Cookies from "js-cookie";
 
 let tasks = new TaskList();
 
+let rep = {};
+async function load() {
+    let us = jwtDecode(Cookies.get("usr"))
+    console.log(us.cookie.user.id);
+    let tmpRep = {};
+    try{
+        let data = await GetReport(us.cookie.user.id)
+        tmpRep = data;
+        return tmpRep;
+    } catch(e) {
+        console.log(e);
+        return null;
+    }
+}
 const Tasks = () => {
+    load().then(response => {
+        rep = response;
+    })
+    console.log(JSON.stringify(rep));
+
+    return(<TasksSearch/>)
+}
+const TasksSearch = observer(() => {
     const [familiarize, setFamiliarize] = useState(false);
     const [send, setSend] = useState(false);
     const [search, setSearch] = useState("");
@@ -70,7 +95,46 @@ const Tasks = () => {
             <TaskListPlace/>
         </>
     );
-};
+});
+const Report = observer(() =>{
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    return(
+        <>
+            <Button variant="primary" onClick={handleShow}>
+                Получить отчет
+            </Button>
+
+            <Modal show={show} fullscreen={true} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Отчет о заданиях</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Container>
+                        <Row>
+                            <Col xs={12} md={8}>
+                            .col-xs-12 .col-md-8
+                            </Col>
+                            <Col xs={6} md={4}>
+                            .col-xs-6 .col-md-4
+                            </Col>
+                        </Row>
+
+                    </Container>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Закрыть
+                    </Button>
+                    <Button variant="primary" onClick={handleClose}>
+                        Распечатать
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        </>
+    );
+});
 const TaskListPlace = observer(() => {
     return(
         <>
@@ -89,6 +153,9 @@ const TaskListPlace = observer(() => {
                         ))}
                     </div>
                 </div>
+            </div>
+            <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <Report/>
             </div>
         </>
     );
