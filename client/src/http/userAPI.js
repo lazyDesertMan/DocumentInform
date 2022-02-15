@@ -46,8 +46,8 @@ export const GetTasks = async () => {
         return null
     }
 }
-/*export const GetPDF = async (id) => {
-    const request = new Request(' localhost:1337/api/document/read?docID=' + id, {
+export const GetReport = async (id) => {
+    const request = new Request(' http://localhost:1337/api/report/taskReport/?userID=' + id, {
         mode: 'cors',
         method: "GET",
         credentials: "include",
@@ -60,4 +60,4 @@ export const GetTasks = async () => {
     } catch {
         return null
     }
-}*/
+}
