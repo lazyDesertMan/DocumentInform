@@ -59,3 +59,11 @@
 .custom-checkbox:disabled+label::before {
     background-color: #e9ecef;
 }
+.drop-area{
+    width: 11vw;
+    height: 11vh;
+    border: 5px dashed black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -1,3 +1,4 @@
+import { pdfjs } from "react-pdf";
 
 export const authorization = async (login, password) => {
     const data = { login : login, password : password }
@@ -54,6 +55,24 @@ export const GetReport = async (id) => {
         headers: {
             'Content-Type': 'application/json'
         },
+    });
+    try {
+        return await (await fetch(request)).json()
+    } catch {
+        return null
+    }
+}
+// TODO не знаю даже
+export const SetFiles = async (fData) => {
+    const request = new Request('http://localhost:1337/api/upload', {
+        mode: 'cors',
+        method: "POST",
+        credentials: "include",
+        headers: {
+            'Content-Type': 'application/pdf'
+        },
+        body: pdfjs.stringify(fData),
+        //body: JSON.stringify(fData),
     });
     try {
         return await (await fetch(request)).json()
