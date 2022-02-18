@@ -4,13 +4,13 @@ import UserController from "../controllers/userController";
 
 const reportRouter = express.Router();
 
-let reportController : ReporpController = new ReporpController();
-let userController : UserController = new UserController();
+const reportController : ReporpController = new ReporpController();
+const userController : UserController = new UserController();
 
-reportRouter.get("/taskReport", async (req : express.Request, res : express.Response) => {
-    let userID = Number(req.query.userID);
+reportRouter.get("/taskReport", (req : express.Request, res : express.Response) => {
+    const userID = Number(req.query.userID);
     if (userID) {
-        let user = userController.findUserByID(userID);
+        const user = userController.findUserByID(userID);
         if (user)
             res.send(reportController.getTaskReport(user));
         else

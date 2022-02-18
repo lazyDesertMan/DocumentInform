@@ -14,7 +14,7 @@ class jwtManager {
      * @returns JWT
      */
     public static create(user: UserData) : string {
-        let cookie : CookieData = new CookieData();
+        const cookie : CookieData = new CookieData();
         cookie.user = user;
         return jwt.sign({cookie}, jwtManager.JWTKey, { expiresIn: '7d' });
     }
@@ -25,7 +25,7 @@ class jwtManager {
      * @returns Данные токена
      */
     public static verify(token : string) : CookieData {
-        let verifiedToken : any = jwt.verify(token, jwtManager.JWTKey);
+        const verifiedToken : any = jwt.verify(token, jwtManager.JWTKey);
         return verifiedToken.cookie as CookieData
     }
 }

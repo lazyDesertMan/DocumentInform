@@ -43,15 +43,15 @@ class DbgPositionRepository implements IPositionRepository {
     }
 
     getUserReplaces(userID: number): Replace[] {
-        let replaces : Replace[] = [];
+        const replaces : Replace[] = [];
         for (let idx = 0; idx < DbgPositionRepository.replaces.length; idx++)
             if (DbgPositionRepository.replaces[idx].userID === userID) {
-                let pos = this.findByID(DbgPositionRepository.replaces[idx].positionID);
-                let startDate = new Date();
-                let endDate = new Date();
+                const pos = this.findByID(DbgPositionRepository.replaces[idx].positionID);
+                const startDate = new Date();
+                const endDate = new Date();
                 startDate.setTime(endDate.getTime() - 100);
                 endDate.setTime(endDate.getTime() + 100);
-                let curReplace = new Replace().init(pos, startDate, endDate);
+                const curReplace = new Replace().init(pos, startDate, endDate);
                 replaces.push(curReplace);
             }
         return replaces;
@@ -78,7 +78,7 @@ class DbgPositionRepository implements IPositionRepository {
     }
 
     free() : Position[] {
-        let list : Position[] = [];
+        const list : Position[] = [];
         for (let idx = 0; idx < DbgPositionRepository.positions.length; idx++)
             if (DbgPositionRepository.positions[idx].userID === 0)
                 list.push(DbgPositionRepository.positions[idx].position);

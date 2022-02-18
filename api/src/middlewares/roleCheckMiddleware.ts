@@ -8,7 +8,7 @@ import { jwtManager } from '../services/jwtManager';
  */
 function getToken (req: express.Request) : string {
     if (req.cookies.usr != undefined) {
-        return req.cookies.usr;
+        return String(req.cookies.usr);
     }
     return null;
 }
@@ -19,7 +19,7 @@ function getToken (req: express.Request) : string {
  * @returns Данные пользователя
  */
 function getUser(req: express.Request) {
-    let cookie : CookieData = jwtManager.verify(getToken(req));
+    const cookie : CookieData = jwtManager.verify(getToken(req));
     return cookie.user;
 }
 
@@ -29,7 +29,7 @@ function getUser(req: express.Request) {
 export default (requiredRole : string[]) => {
     return (req: express.Request, res: express.Response, next: express.NextFunction) => {
         try {
-            let user : UserData = getUser(req);
+            const user : UserData = getUser(req);
             let access : boolean = false;
             for (let idx = 0; !access && idx < requiredRole.length; idx++)
                 if (requiredRole[idx] == user.role)

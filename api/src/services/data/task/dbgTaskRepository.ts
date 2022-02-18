@@ -47,7 +47,7 @@ class DbgTaskRepository implements ITaskRepository {
     }
 
     public userActiveTasks(userID: number): ITask[] {
-        let tasks : ITask[] = [];
+        const tasks : ITask[] = [];
         for (let idx : number = 0; idx < DbgTaskRepository.activeTasks.length; idx++)
             if (DbgTaskRepository.activeTasks[idx].type == TaskType.READ_TASK_TYPE
                 && (DbgTaskRepository.activeTasks[idx] as ReadTask).recipient == userID)
@@ -56,7 +56,7 @@ class DbgTaskRepository implements ITaskRepository {
     }
 
     public userCompleteTasks(userID: number): CompleteFact[] {
-        let tasks : CompleteFact[] = [];
+        const tasks : CompleteFact[] = [];
         for (let idx : number = 0; idx < DbgTaskRepository.completedTasks.length; idx++)
             if (DbgTaskRepository.completedTasks[idx].completedTask.type == TaskType.READ_TASK_TYPE
                 && (DbgTaskRepository.completedTasks[idx].completedTask as ReadTask).recipient == userID)
@@ -65,7 +65,7 @@ class DbgTaskRepository implements ITaskRepository {
     }
 
     positionActiveTasks(posID: number): ITask[] {
-        let tasks : ITask[] = [];
+        const tasks : ITask[] = [];
         for (let idx : number = 0; idx < DbgTaskRepository.activeTasks.length; idx++)
             if (DbgTaskRepository.activeTasks[idx].type == TaskType.RESEND_TASK_TYPE
                 && (DbgTaskRepository.activeTasks[idx] as ResendTask).recipient == posID)
@@ -74,7 +74,7 @@ class DbgTaskRepository implements ITaskRepository {
     }
 
     positionCompleteTasks(posID: number): CompleteFact[] {
-        let tasks : CompleteFact[] = [];
+        const tasks : CompleteFact[] = [];
         for (let idx : number = 0; idx < DbgTaskRepository.completedTasks.length; idx++)
             if (DbgTaskRepository.completedTasks[idx].completedTask.type == TaskType.RESEND_TASK_TYPE
                 && (DbgTaskRepository.completedTasks[idx].completedTask as ResendTask).recipient == posID)
@@ -93,7 +93,7 @@ class DbgTaskRepository implements ITaskRepository {
     }
 
     allowedDocs(userID: number): number[] {
-        let docs : Set<number> = new Set<number>();
+        const docs : Set<number> = new Set<number>();
         for (let idx : number = 0; idx < DbgTaskRepository.activeTasks.length; idx++)
             if (DbgTaskRepository.activeTasks[idx].type == TaskType.READ_TASK_TYPE
                 && (DbgTaskRepository.activeTasks[idx] as ReadTask).recipient == userID)

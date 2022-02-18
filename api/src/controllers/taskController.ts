@@ -28,8 +28,8 @@ class TaskController {
      * @returns Список активных заданий
      */
     public activeTaskList (user : UserData): ITask[] {
-        let position = this.positionRepository.getUserPosition(user.id);
-        let replaces = this.positionRepository.getUserReplaces(user.id);
+        const position = this.positionRepository.getUserPosition(user.id);
+        const replaces = this.positionRepository.getUserReplaces(user.id);
         let tasks = this.taskRepository.userActiveTasks(user.id);
         tasks = tasks.concat(this.taskRepository.positionActiveTasks(position.id));
         for (let idx = 0; idx < replaces.length; idx++)
@@ -43,17 +43,17 @@ class TaskController {
      * @returns Список завершённых заданий
      */
     public completeTaskList (user : UserData) : CompleteFact[] {
-        let position = this.positionRepository.getUserPosition(user.id);
-        let replaces = this.positionRepository.getUserReplaces(user.id);
+        const position = this.positionRepository.getUserPosition(user.id);
+        const replaces = this.positionRepository.getUserReplaces(user.id);
         let tasks = this.taskRepository.userCompleteTasks(user.id);
-        tasks.concat(this.taskRepository.positionCompleteTasks(position.id));
+        tasks = tasks.concat(this.taskRepository.positionCompleteTasks(position.id));
         for (let idx = 0; idx < replaces.length; idx++)
-            tasks.concat(this.taskRepository.positionCompleteTasks(replaces[idx].position.id));
+            tasks = tasks.concat(this.taskRepository.positionCompleteTasks(replaces[idx].position.id));
         return tasks;
     }
 
     public addTask (tsk : ITask) : number {
-        let doc = this.documentRepository.findOne(tsk.documentID);
+        const doc = this.documentRepository.findOne(tsk.documentID);
         if (!doc)
             throw("Документ не существует")
         tsk.document = doc.name;
