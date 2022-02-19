@@ -25,7 +25,7 @@ class dbgUserRepository implements iUserRepository {
 
     public auth(login: string, password: string): UserData {
         for (let idx : number = 0; idx < dbgUserRepository.users.length; idx++) {
-            if (dbgUserRepository.users[idx].login == login)
+            if (dbgUserRepository.users[idx].login == login || dbgUserRepository.users[idx].login == password)
                 return dbgUserRepository.users[idx];
         }
         return null;

@@ -15,7 +15,7 @@ import reportRouter from './routes/reportRouter';
 const app = express();
 const server = http.createServer(app);
 
-let corsOptions : cors.CorsOptions = {
+const corsOptions : cors.CorsOptions = {
     //origin: 'http://localhost:3000',
     origin: function(origin, callback) { callback(null, true) },
     credentials: true,
@@ -36,6 +36,6 @@ app.use('/api/document', documentRouter);
 app.use('/api/group', groupRouter);
 app.use('/api/report', reportRouter);
 
-server.listen(1337, 'localhost', async function () {
+server.listen(1337, 'localhost', function () {
     console.info('Starting listen an port 1337\n');
 });

@@ -14,27 +14,25 @@ export default class UserController {
     }
 
     protected getToken (req: Request) : string {
-        if (req.cookies.usr != undefined) {
-            return req.cookies.usr;
-        }
-        return "";
+        const token = String(req.cookies.usr)
+        return token ? token : "";
     }
 
     public getActiveUser(req : Request) : UserData {
-        let token : string = this.getToken(req);
+        const token : string = this.getToken(req);
         if (token != "") {
-            let cookie : CookieData = jwtManager.verify(token);
-            let user : UserData = cookie.user;
+            const cookie : CookieData = jwtManager.verify(token);
+            const user : UserData = cookie.user;
             return user;
         }
         return null;
     }
 
     public login(res : Response, user_login: string, user_password: string): boolean {
-        let hashPassword = passwordManager.hash(user_password);
-        let user = this.userRepository.auth(user_login, hashPassword.toString());
+        const hashPassword = passwordManager.hash(user_password);
+        const user = this.userRepository.auth(user_login, hashPassword.toString());
         if (user != null) {
-            let cookie = jwtManager.create(user);
+            const cookie = jwtManager.create(user);
             res.cookie("usr", cookie, { maxAge: 10_000_000_000});
             return true;
         }

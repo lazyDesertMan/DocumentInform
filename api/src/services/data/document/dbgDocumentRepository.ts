@@ -16,9 +16,9 @@ class DbgDocumentRepository implements IDocumentRepository {
     }
 
     find(docsID: number[]): Document[] {
-        let docs : Document[] = [];
+        const docs : Document[] = [];
         for (let curIdx = 0; curIdx < docsID.length; curIdx++) {
-            let curDoc = this.findOne(docsID[curIdx]);
+            const curDoc = this.findOne(docsID[curIdx]);
             if (curDoc != null) {
                 docs.push(curDoc);
             }

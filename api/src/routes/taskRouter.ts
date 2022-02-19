@@ -14,21 +14,22 @@ const taskRouter = express.Router();
 const userContrl : UserController = new UserController();
 const taskContrl : TaskController = new TaskController();
 
-taskRouter.get("/active", roleCheckMiddleware([Roles.ROLE_WORKER, Roles.ROLE_LEADER]), async (req : express.Request, res : express.Response) => {
+taskRouter.get("/active", roleCheckMiddleware([Roles.ROLE_WORKER, Roles.ROLE_LEADER]), (req : express.Request, res : express.Response) => {
     try {
-        let user : UserData = await userContrl.getActiveUser(req);
-        let tasks: ITask[] = await taskContrl.activeTaskList(user);
+        const user : UserData = userContrl.getActiveUser(req);
+        const tasks: ITask[] = taskContrl.activeTaskList(user);
         res.send(JSON.stringify(tasks, null, 2));
     } catch (e) {
         console.error(e);
         res.send("");
     }
+    console.log("response");
 });
 
-taskRouter.get("/complete", roleCheckMiddleware([Roles.ROLE_WORKER, Roles.ROLE_LEADER]), async (req : express.Request, res : express.Response) => {
+taskRouter.get("/complete", roleCheckMiddleware([Roles.ROLE_WORKER, Roles.ROLE_LEADER]), (req : express.Request, res : express.Response) => {
     try {
-        let user : UserData = await userContrl.getActiveUser(req);
-        let tasks: CompleteFact[] = await taskContrl.completeTaskList(user);
+        const user : UserData = userContrl.getActiveUser(req);
+        const tasks: CompleteFact[] = taskContrl.completeTaskList(user);
         res.send(JSON.stringify(tasks, null, 2));
     } catch (e) {
         console.error(e);
@@ -36,11 +37,11 @@ taskRouter.get("/complete", roleCheckMiddleware([Roles.ROLE_WORKER, Roles.ROLE_L
     }
 });
 
-taskRouter.post("/add", roleCheckMiddleware([Roles.ROLE_LEADER, Roles.ROLE_DIRECTOR]), async (req : express.Request, res : express.Response) => {
+taskRouter.post("/add", roleCheckMiddleware([Roles.ROLE_LEADER, Roles.ROLE_DIRECTOR]), (req : express.Request, res : express.Response) => {
     try {
-        let user : UserData = await userContrl.getActiveUser(req);
+        const user : UserData = userContrl.getActiveUser(req);
+        const type : TaskType = Number(req.body.type);
         let tsk : ITask;
-        let type : TaskType = Number(req.body.type);
         if (type === TaskType.READ_TASK_TYPE)
             tsk = new ReadTask(0, "", Number(req.body.document), Number(user.id), Number(req.body.recipient), new Date(req.body.start), new Date(req.body.end));
         else if (type === TaskType.RESEND_TASK_TYPE)
@@ -48,7 +49,7 @@ taskRouter.post("/add", roleCheckMiddleware([Roles.ROLE_LEADER, Roles.ROLE_DIREC
         else
             throw new Error("Неизвестный тип задания: " + type);
         tsk.type = type;
-        let tskID = taskContrl.addTask(tsk);
+        const tskID = taskContrl.addTask(tsk);
         res.send(tskID.toString());
     } catch (e) {
         console.error(e);

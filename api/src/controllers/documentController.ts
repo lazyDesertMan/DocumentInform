@@ -19,7 +19,7 @@ class DocumentController {
     }
 
     public userDocs(user : UserData) {
-        let docs = this.taskRepository.allowedDocs(user.id);
+        const docs = this.taskRepository.allowedDocs(user.id);
         return this.documentRepository.find(docs);
     }
 

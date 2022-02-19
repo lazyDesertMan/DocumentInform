@@ -19,17 +19,17 @@ class passwordManager {
     protected static readonly Key : string = 'secreting';
 
     protected static makeHash(str : string, salt : string) {
-        let hashGenerator = crypto.createHmac('sha256', passwordManager.Key);
+        const hashGenerator = crypto.createHmac('sha256', passwordManager.Key);
         return hashGenerator.update(str + salt).digest('hex');
     }
 
     public static hash(str : string) : hashedValue {
-        let salt = crypto.randomBytes(16).toString('hex');
+        const salt = crypto.randomBytes(16).toString('hex');
         return new hashedValue(passwordManager.makeHash(str, salt), salt);
     }
 
-    public static async isEqual(val : string, salt : string, etalon : string) {
-        let hash = passwordManager.makeHash(val, salt);
+    public static isEqual(val : string, salt : string, etalon : string) {
+        const hash = passwordManager.makeHash(val, salt);
         return hash === etalon;
     }
 }

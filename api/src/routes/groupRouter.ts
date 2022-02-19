@@ -7,8 +7,8 @@ const groupRouter = express.Router();
 const groupController : GroupController = new GroupController();
 const userController : UserController = new UserController();
 
-groupRouter.get("/position",async (req : express.Request, res : express.Response) => {
-    let userData : UserData = await userController.getActiveUser(req);
+groupRouter.get("/position", (req : express.Request, res : express.Response) => {
+    const userData : UserData = userController.getActiveUser(req);
     if (userData)
         res.send(groupController.getPosition(userData.id));
     else

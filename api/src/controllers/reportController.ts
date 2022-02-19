@@ -15,8 +15,8 @@ export default class ReporpController {
     }
     
     public getTaskReport(user : UserData) : TaskReport {
-        let position = this.positionRepository.getUserPosition(user.id);
-        let report = new TaskReport(user.name, position ? position.name : "");
+        const position = this.positionRepository.getUserPosition(user.id);
+        const report = new TaskReport(user.name, position ? position.name : "");
         let activeTasks = this.taskRepository.userActiveTasks(user.id)
         let completedTask = this.taskRepository.userCompleteTasks(user.id);
         if (position) {
@@ -24,7 +24,7 @@ export default class ReporpController {
             completedTask = completedTask.concat(this.taskRepository.positionCompleteTasks(position.id));
         }
         for (let idx = 0; idx < activeTasks.length; idx++) {
-            let status = (activeTasks[idx].deadline < report.date) ?
+            const status = (activeTasks[idx].deadline < report.date) ?
                 TaskStatus.TSTAT_DEADLINE_VIOLATION : TaskStatus.TSTAT_ACTIVE 
             report.add(activeTasks[idx], status);
         }
