@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Container, Nav, Navbar, Button, Offcanvas } from "react-bootstrap";
 import { Context } from "..";
-import { COMPLETED_ROUTE, DOCUMENT_ROUTE, HOME_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, TASKS_ROUTE } from "../utils/consts";
+import { COMPLETED_ROUTE, DOCUMENT_ROUTE, HOME_ROUTE, LOGIN_ROUTE, OPTIONS_ROUTE, REGISTRATION_ROUTE, TASKS_ROUTE } from "../utils/consts";
 import '../css/style.css';
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie'
@@ -64,6 +64,13 @@ const NavBar = () => {
                                     <Button 
                                         variant={"outline-dark"} 
                                         className="mt-2"
+                                        onClick={() => navigate(OPTIONS_ROUTE)}
+                                    >
+                                        Администрация
+                                    </Button>
+                                    <Button 
+                                        variant={"outline-dark"} 
+                                        className="mt-2"
                                         onClick={() => Exit()}
                                     >
                                         Выход
@@ -108,6 +115,13 @@ const NavBar = () => {
                                         onClick={() => navigate(DOCUMENT_ROUTE)}
                                     >
                                         Файлы
+                                    </Button>
+                                    <Button 
+                                        variant={"outline-dark"} 
+                                        className="mt-2"
+                                        onClick={() => navigate(OPTIONS_ROUTE)}
+                                    >
+                                        Администрация
                                     </Button>
                                     <Button 
                                         variant={"outline-dark"} 

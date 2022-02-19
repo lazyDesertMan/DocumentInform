@@ -4,7 +4,7 @@ import '../css/style.css';
 import TaskList from '../classes/TaskList';
 import { GetTasks, GetReport } from "../http/userAPI";
 import { observer } from "mobx-react-lite";
-import { Button, Modal, Row, Col, Container, Spinner} from "react-bootstrap";
+import { Button, Modal, Container} from "react-bootstrap";
 import jwtDecode from "jwt-decode";
 import Cookies from "js-cookie";
 import ReportList from "../classes/ReportList";
@@ -100,11 +100,9 @@ const Report = observer(() =>{
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     if(rep.list === null){
-        console.log("if" + JSON.stringify(rep))
         return <div></div>
     }
     else{ 
-        console.log("else" + JSON.stringify(rep))
         return(
         <>
             <Button variant="primary" onClick={handleShow}>
@@ -115,51 +113,35 @@ const Report = observer(() =>{
                     <Modal.Title>Отчет о заданиях [{rep.list.userName}]</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Container>
-                        <Row className="block-example border border-dark">
-                            
-                        </Row>
-                        <Row key={"MainRow"} xs={"7"}>
-                            <Col className="block-example border border-dark">
-                                Документ
-                            </Col>
-                            <Col className="block-example border border-dark">
-                                Дата выдачи
-                            </Col>
-                            <Col className="block-example border border-dark">
-                                Предельный срок
-                            </Col>
-                            <Col className="block-example border border-dark">
-                                Тип задания
-                            </Col>
-                            <Col className="block-example border border-dark">
-                                Статус задания
-                            </Col>
-                        </Row>
-                        <Row className="block-example border border-dark">
-
-                        </Row>
-                        {Array.from({ length: rep.list.tasks.length }).map((_, idx) => (
-                            <Row key={"row" + idx} xs={"7"}>
-                                <Col className="block-example border border-dark">
-                                    {rep.list.tasks[idx].task.document}
-                                </Col>
-                                <Col className="block-example border border-dark">
-                                    {rep.list.tasks[idx].task.startDate}
-                                </Col>
-                                <Col className="block-example border border-dark">
-                                    {rep.list.tasks[idx].task.deadline}
-                                </Col>
-                                <Col className="block-example border border-dark">
-                                    {rep.list.tasks[idx].task.type === 1 ? "Прочитать" : "Переслать" }
-                                </Col>
-                                <Col className="block-example border border-dark">
-                                    {rep.list.tasks[idx].status === 1 ? "Выполнено" 
+                    <Container >
+                        <div className="table-responsive">
+                            <table style={{fontSize:'14px'}} className="table table-striped table-sm">
+                                <thead>
+                                    <tr key={"thead"}>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Документ</th>
+                                        <th scope="col">Дата выдачи</th>
+                                        <th scope="col">Предельный срок</th>
+                                        <th scope="col">Тип задания</th>
+                                        <th scope="col">Статус задания</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {Array.from({ length: rep.list.tasks.length }).map((_, idx) => (
+                                    <tr key={"tbody" + idx}>
+                                    <td>{idx + 1}</td>
+                                    <td>Административная пизда которая хочет понюхать жопу</td>
+                                    <td>{rep.list.tasks[idx].task.startDate}</td>
+                                    <td>{rep.list.tasks[idx].task.deadline}</td>
+                                    <td>{rep.list.tasks[idx].task.type === 1 ? "Прочитать" : "Переслать" }</td>
+                                    <td>{rep.list.tasks[idx].status === 1 ? "Выполнено" 
                                         :rep.list.tasks[idx].status === 2 ? "Не выполненно (без нарушений)" 
-                                        : "Не выполненно (с нарушением)"}
-                                </Col>
-                            </Row>
-                        ))}
+                                        : "Не выполненно (с нарушением)"}</td>
+                                    </tr>
+                                ))}
+                                </tbody>
+                            </table>
+                        </div>
                     </Container>
                 </Modal.Body>
                 <Modal.Footer>

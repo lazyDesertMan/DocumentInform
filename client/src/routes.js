@@ -40,6 +40,10 @@ export const authRoutes = [
         path: PDF_ROUTE + '/:id' ,
         Component: PDF
     },
+    {
+        path: OPTIONS_ROUTE ,
+        Component: Options
+    },
 ]
 
 export const adminRoutes = [
@@ -75,6 +79,10 @@ export const adminRoutes = [
         path: PDF_ROUTE + '/:id' ,
         Component: PDF
     },
+    {
+        path: OPTIONS_ROUTE ,
+        Component: Options
+    },
 ]
 
 export const publicRoutes = [
@@ -89,9 +97,5 @@ export const publicRoutes = [
     {
         path: ERROR_ROUTE ,
         Component: Error
-    },
-    {
-        path: OPTIONS_ROUTE ,
-        Component: Options
     },
 ]

@@ -18,15 +18,11 @@ const Profile = () => {
                         <ListGroupItem>Должность: Программист</ListGroupItem>
                         <ListGroupItem>Группа: ДИПРб-41</ListGroupItem>
                     </ListGroup>
-                    <Card.Body>
-                        <Card.Link href="#">Мб пригодиться</Card.Link>
-                    </Card.Body>
                 </Card>
                 <Card style={{ width: '75%', marginLeft: '1%' }}>
                     <Card.Body>
-                        <Card.Title>ОБНОВЛЕНИЯ</Card.Title>
+                        <Card.Title></Card.Title>
                         <Card.Text>
-                        НИХРЕНА СЕБЕ НОВАЯ ВЕРСИЯ ДОКА ВЫШЛА, ПРИКИНЬ.
                         </Card.Text>
                     </Card.Body>
                 </Card>
