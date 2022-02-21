@@ -51,7 +51,7 @@ const DocumentListPlace = observer(() => {
                             <a id="item" key={docs.list[idx].id} href={"http://localhost:3000/pdf/" + docs.list[idx].id} className="list-group-item list-group-item-action py-3 lh-tight">
                                 <div className="d-flex w-100 align-items-center justify-content-between">
                                 <strong className="mb-1">{docs.list[idx].name}</strong>
-                                <small>{docs.list[idx].effectiveDate}</small>
+                                <small>{new Date(Date.parse(docs.list[idx].effectiveDate)).toLocaleString()}</small>
                                 </div>
                                 <div className="col-10 mb-1 small">{docs.list[idx].description}</div>
                             </a>

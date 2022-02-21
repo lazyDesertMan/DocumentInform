@@ -1,6 +1,6 @@
 import {makeAutoObservable} from "mobx";
 
-export default class TaskList {
+export default class UserList {
     constructor() {
         this._data = new Array();
         makeAutoObservable(this)

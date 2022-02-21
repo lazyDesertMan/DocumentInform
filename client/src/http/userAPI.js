@@ -103,3 +103,35 @@ export async function SetCompleted(taskID) {
         console.log(e);
     }
 }
+// Получить список пользователей
+export const GetListUsers = async () => {
+    const request = new Request('localhost:1337/api/user/workers', {
+        mode: 'cors',
+        method: "GET",
+        credentials: "include",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    });
+    try {
+        return await (await fetch(request)).json()
+    } catch {
+        return null
+    }
+}
+// Получить список документов
+export const GetListDocuments = async () => {
+    const request = new Request('localhost:1337/api/document/list', {
+        mode: 'cors',
+        method: "GET",
+        credentials: "include",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    });
+    try {
+        return await (await fetch(request)).json()
+    } catch {
+        return null
+    }
+}

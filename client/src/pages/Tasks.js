@@ -170,8 +170,8 @@ const TaskListPlace = observer(() => {
                                         <strong className="mb-1">{tasks.list[idx].document}</strong>
                                         <small>Прочитать</small>
                                     </div>
-                                    <div className="col-10 mb-1 small">Выдано {tasks.list[idx].startDate}</div>
-                                    <div className="col-10 mb-1 small">Выполнить до {tasks.list[idx].deadline}</div>
+                                    <div className="col-10 mb-1 small">Выдано {new Date(Date.parse(tasks.list[idx].startDate)).toLocaleString()}</div>
+                                    <div className="col-10 mb-1 small">Выполнить до {new Date(Date.parse(tasks.list[idx].deadline)).toLocaleString()}</div>
                                 </a>
                             :
                             <a id="item" key={tasks.list[idx].ID} href={"#"} className="list-group-item list-group-item-action py-3 lh-tight">
@@ -180,11 +180,9 @@ const TaskListPlace = observer(() => {
                                         <strong className="mb-1">{tasks.list[idx].document}</strong>
                                         <small>Переслать</small>
                                     </div>
-                                    <div className="col-10 mb-1 small">Выдано {tasks.list[idx].startDate}</div>
-                                    <div className="col-10 mb-1 small">Выполнить до {tasks.list[idx].deadline}</div>
-                                </div>
-                                <div className="col-10 mb-1 small">Выдано {new Date(Date.parse(tasks.list[idx].startDate)).toLocaleString()}</div>
-                                <div className="col-10 mb-1 small">Выполнить до {new Date(Date.parse(tasks.list[idx].deadline)).toLocaleString()}</div>
+                                    <div className="col-10 mb-1 small">Выдано {new Date(Date.parse(tasks.list[idx].startDate)).toLocaleString()}</div>
+                                    <div className="col-10 mb-1 small">Выполнить до {new Date(Date.parse(tasks.list[idx].deadline)).toLocaleString()}</div>
+                                </div> 
                             </a>
                         ))}
                     </div>
