@@ -1,4 +1,5 @@
 import { pdfjs } from "react-pdf";
+import {  } from "../utils/consts"
 
 export const authorization = async (login, password) => {
     const data = { login : login, password : password }
@@ -78,5 +79,27 @@ export const SetFiles = async (fData) => {
         return await (await fetch(request)).json()
     } catch {
         return null
+    }
+}
+
+/**
+ * Функция, отслылающая запрос к API. Уведомляет АПИ о выполнении задания с ID = %taskID
+ */
+export async function SetCompleted(taskID) {
+    const path = process.env.REACT_APP_API_URL + process.env.REACT_APP_API_TASK_PATH + process.env.REACT_APP_API_COMPLETE_TASK;
+    const request = new Request(path , {
+        mode: 'cors',
+        method: "POST",
+        credentials: "include",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({taskID : taskID})
+    });
+    try {
+        await fetch(request);
+    }
+    catch(e) {
+        console.log(e);
     }
 }

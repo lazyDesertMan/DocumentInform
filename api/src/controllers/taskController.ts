@@ -42,7 +42,7 @@ class TaskController {
      * @param user Пользователь, для которого ведётся формирование списка завершённых заданий
      * @returns Список завершённых заданий
      */
-    public completeTaskList (user : UserData) : CompleteFact[] {
+    public completedTaskList (user : UserData) : CompleteFact[] {
         const position = this.positionRepository.getUserPosition(user.id);
         const replaces = this.positionRepository.getUserReplaces(user.id);
         let tasks = this.taskRepository.userCompleteTasks(user.id);
@@ -58,6 +58,10 @@ class TaskController {
             throw("Документ не существует")
         tsk.document = doc.name;
         return this.taskRepository.add(tsk);
+    }
+
+    public comleteTask(user : UserData, taskID : number) {
+        this.taskRepository.setCompleted(taskID, user.id);
     }
 }
 

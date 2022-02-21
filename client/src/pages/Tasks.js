@@ -163,10 +163,25 @@ const TaskListPlace = observer(() => {
                 <div style={{width: '60%', marginTop: '1%'}}>
                     <div className="list-group list-group-flush border-bottom scrollarea">
                         {Array.from({ length: tasks.list.length }).map((_, idx) => (
-                            <a id="item" key={tasks.list[idx].ID} href="#" className="list-group-item list-group-item-action py-3 lh-tight">
-                                <div className="d-flex w-100 align-items-center justify-content-between">
-                                <strong className="mb-1">{tasks.list[idx].document}</strong>
-                                <small>{ tasks.list[idx].type === 1 ? "Прочитать" : "Переслать" }</small>
+                            tasks.list[idx].type === 1 ? 
+                                <a id="item" key={tasks.list[idx].ID} href={"http://localhost:3000/pdf/" + tasks.list[idx].documentID
+                                + "/" + tasks.list[idx].ID} className="list-group-item list-group-item-action py-3 lh-tight">
+                                    <div className="d-flex w-100 align-items-center justify-content-between">
+                                        <strong className="mb-1">{tasks.list[idx].document}</strong>
+                                        <small>Прочитать</small>
+                                    </div>
+                                    <div className="col-10 mb-1 small">Выдано {tasks.list[idx].startDate}</div>
+                                    <div className="col-10 mb-1 small">Выполнить до {tasks.list[idx].deadline}</div>
+                                </a>
+                            :
+                            <a id="item" key={tasks.list[idx].ID} href={"#"} className="list-group-item list-group-item-action py-3 lh-tight">
+                                <div>
+                                    <div className="d-flex w-100 align-items-center justify-content-between">
+                                        <strong className="mb-1">{tasks.list[idx].document}</strong>
+                                        <small>Переслать</small>
+                                    </div>
+                                    <div className="col-10 mb-1 small">Выдано {tasks.list[idx].startDate}</div>
+                                    <div className="col-10 mb-1 small">Выполнить до {tasks.list[idx].deadline}</div>
                                 </div>
                                 <div className="col-10 mb-1 small">Выдано {new Date(Date.parse(tasks.list[idx].startDate)).toLocaleString()}</div>
                                 <div className="col-10 mb-1 small">Выполнить до {new Date(Date.parse(tasks.list[idx].deadline)).toLocaleString()}</div>
