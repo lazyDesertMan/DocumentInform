@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Container, Nav, Navbar, Button, Offcanvas } from "react-bootstrap";
 import { Context } from "..";
-import { COMPLETED_ROUTE, DOCUMENT_ROUTE, HOME_ROUTE, LOGIN_ROUTE, OPTIONS_ROUTE, REGISTRATION_ROUTE, TASKS_ROUTE } from "../utils/consts";
+import { PROFILE_ROUTE ,COMPLETED_ROUTE, DOCUMENT_ROUTE, HOME_ROUTE, LOGIN_ROUTE, OPTIONS_ROUTE, REGISTRATION_ROUTE, TASKS_ROUTE } from "../utils/consts";
 import '../css/style.css';
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie'
@@ -13,6 +13,8 @@ const NavBar = () => {
     const Exit = ()=>{
         Cookies.remove("usr");
         user.setIsAuth(false);
+        user.setIsAdmin(false);
+        user.setIsLeader(false);
         navigate(LOGIN_ROUTE);
         document.location.reload();
     }
@@ -33,6 +35,13 @@ const NavBar = () => {
                             </Offcanvas.Header>
                             <Offcanvas.Body>
                                 <Nav className="justify-content-end flex-grow-1 pe-3">
+                                    <Button 
+                                        variant={"outline-dark"} 
+                                        className="mt-2"
+                                        onClick={() => navigate(PROFILE_ROUTE)}
+                                    >
+                                        Профиль
+                                    </Button>
                                     <Button 
                                         variant={"outline-dark"} 
                                         className="mt-2"
@@ -98,9 +107,9 @@ const NavBar = () => {
                                     <Button 
                                         variant={"outline-dark"} 
                                         className="mt-2"
-                                        onClick={() => navigate(TASKS_ROUTE)}
+                                        onClick={() => navigate(PROFILE_ROUTE)}
                                     >
-                                        Задачи
+                                        Профиль
                                     </Button>
                                     <Button 
                                         variant={"outline-dark"} 
@@ -119,9 +128,57 @@ const NavBar = () => {
                                     <Button 
                                         variant={"outline-dark"} 
                                         className="mt-2"
-                                        onClick={() => navigate(OPTIONS_ROUTE)}
+                                        onClick={() => Exit()}
                                     >
-                                        Администрация
+                                        Выход
+                                    </Button>
+                                </Nav>
+                            </Offcanvas.Body>
+                        </Navbar.Offcanvas>
+                    </Container>
+                </Navbar>
+            :user.isLeader ?
+                <Navbar bg="light" expand={false}>
+                    <Container fluid>
+                        <Navbar.Brand href={HOME_ROUTE} className="home">Home</Navbar.Brand>
+                        <Navbar.Toggle aria-controls="offcanvasNavbar" />
+                        <Navbar.Offcanvas
+                            id="offcanvasNavbar"
+                            aria-labelledby="offcanvasNavbarLabel"
+                            placement="end"
+                        >
+                            <Offcanvas.Header closeButton>
+                                <Offcanvas.Title id="offcanvasNavbarLabel">Menu</Offcanvas.Title>
+                            </Offcanvas.Header>
+                            <Offcanvas.Body>
+                                <Nav className="justify-content-end flex-grow-1 pe-3">
+                                    <Button 
+                                        variant={"outline-dark"} 
+                                        className="mt-2"
+                                        onClick={() => navigate(PROFILE_ROUTE)}
+                                    >
+                                        Профиль
+                                    </Button>
+                                    <Button 
+                                        variant={"outline-dark"} 
+                                        className="mt-2"
+                                        onClick={() => navigate(TASKS_ROUTE)}
+                                    >
+                                        Задачи
+                                    </Button>
+                                    <Button 
+                                        variant={"outline-dark"} 
+                                        className="mt-2"
+                                        onClick={() => navigate(COMPLETED_ROUTE)}
+                                    >
+                                        Выполненное
+                                    </Button>
+                                    <Button 
+                                        variant={"outline-dark"} 
+                                        className="mt-2"
+                                        onClick={() => navigate(DOCUMENT_ROUTE)}
+                                    >
+                                        Файлы
                                     </Button>
                                     <Button 
                                         variant={"outline-dark"} 

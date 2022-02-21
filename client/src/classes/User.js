@@ -4,6 +4,7 @@ export default class User {
     constructor() {
         this._isAuth = false
         this._isAdmin = false
+        this._isLeader = false
         this._user = {}
         makeAutoObservable(this)
     }
@@ -14,6 +15,9 @@ export default class User {
     setIsAdmin(bool) {
         this._isAdmin = bool
     }
+    setIsLeader(bool) {
+        this._isLeader = bool
+    }
     setUser(user) {
         this._user = user
     }
@@ -23,6 +27,9 @@ export default class User {
     }
     get isAdmin() {
         return this._isAdmin
+    }
+    get isLeader() {
+        return this._isLeader
     }
     get user() {
         return this._user

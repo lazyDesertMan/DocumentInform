@@ -5,7 +5,6 @@ import { useNavigate, useParams } from "react-router-dom";
 
 const Add = () => {
     const {id} = useParams();
-    console.log(id);
     return(
         <div>
             {id == 1? 

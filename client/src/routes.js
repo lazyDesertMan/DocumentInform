@@ -34,8 +34,38 @@ export const authRoutes = [
         Component: Error
     },
     {
+        path: PDF_ROUTE + '/:id' ,
+        Component: PDF
+    },
+    {
+        path: PDF_ROUTE + '/:id/:taskID' ,
+        Component: PDF
+    },
+]
+export const leaderRoutes = [
+    {
+        path: PROFILE_ROUTE ,
+        Component: Profile
+    },
+    {
+        path: DOCUMENT_ROUTE,
+        Component: Document
+    },
+    {
+        path: COMPLETED_ROUTE ,
+        Component: Completed
+    },
+    {
         path: TASKS_ROUTE ,
         Component: Tasks
+    },
+    {
+        path: HOME_ROUTE ,
+        Component: Home
+    },
+    {
+        path: ERROR_ROUTE ,
+        Component: Error
     },
     {
         path: PDF_ROUTE + '/:id' ,
@@ -45,14 +75,6 @@ export const authRoutes = [
         path: PDF_ROUTE + '/:id/:taskID' ,
         Component: PDF
     },
-    {
-        path: OPTIONS_ROUTE ,
-        Component: Options
-    },
-    {
-        path: ADD_ROUTE + '/:id',
-        Component: Add
-    }
 ]
 
 export const adminRoutes = [
@@ -89,9 +111,17 @@ export const adminRoutes = [
         Component: PDF
     },
     {
+        path: PDF_ROUTE + '/:id/:taskID' ,
+        Component: PDF
+    },
+    {
         path: OPTIONS_ROUTE ,
         Component: Options
     },
+    {
+        path: ADD_ROUTE + '/:id',
+        Component: Add
+    }
 ]
 
 export const publicRoutes = [

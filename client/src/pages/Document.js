@@ -8,7 +8,6 @@ import { observer } from "mobx-react-lite";
 let docs = new DocumentList();
 
 async function load() {
-    let docs = new DocumentList();
     try{
         let data = await GetDocuments()
         docs.list = data;

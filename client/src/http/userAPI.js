@@ -105,7 +105,7 @@ export async function SetCompleted(taskID) {
 }
 // Получить список пользователей
 export const GetListUsers = async () => {
-    const request = new Request('localhost:1337/api/user/workers', {
+    const request = new Request('http://localhost:1337/api/user/workers', {
         mode: 'cors',
         method: "GET",
         credentials: "include",
@@ -121,7 +121,7 @@ export const GetListUsers = async () => {
 }
 // Получить список документов
 export const GetListDocuments = async () => {
-    const request = new Request('localhost:1337/api/document/list', {
+    const request = new Request('http://localhost:1337/api/document/list', {
         mode: 'cors',
         method: "GET",
         credentials: "include",
@@ -135,3 +135,39 @@ export const GetListDocuments = async () => {
         return null
     }
 }
+// Получить список ролей
+export const GetListPosition = async () => {
+    const request = new Request('http://localhost:1337/api/group/positionList', {
+        mode: 'cors',
+        method: "GET",
+        credentials: "include",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    });
+    try {
+        return await (await fetch(request)).json()
+    } catch {
+        return null
+    }
+}
+// Внесение нового задания
+export async function SetTask(type, document, recipient, startDate, deadline) {
+    const data = { type : type, document : document, recipient : recipient, startDate : startDate, deadline : deadline}
+    const request = new Request('http://localhost1337/api/task/add' , {
+        mode: 'cors',
+        method: "POST",
+        credentials: "include",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+    try {
+        await fetch(request);
+    }
+    catch(e) {
+        console.log(e);
+    }
+}
+

@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { Context } from "..";
 import { ERROR_ROUTE, HOME_ROUTE, PROFILE_ROUTE } from "../utils/consts";
 import { authorization } from "../http/userAPI";
+import Cookies from "js-cookie";
+import jwtDecode from "jwt-decode";
 
 const Login = observer(() => {
     const {user} = useContext(Context)
@@ -19,7 +21,12 @@ const Login = observer(() => {
                 navigate(HOME_ROUTE);
             }else if(data === true){
                 user.setUser(data);
-                user.setIsAuth(true);
+                if(jwtDecode(Cookies.get("usr")).cookie.user.role === "director")
+                    user.setIsAdmin(true);
+                else if(jwtDecode(Cookies.get("usr")).cookie.user.role === "leader")
+                    user.setIsLeader(true);
+                else
+                    user.setIsAuth(true);
                 navigate(PROFILE_ROUTE);
             }else{
                 navigate(ERROR_ROUTE);
