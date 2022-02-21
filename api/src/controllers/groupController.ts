@@ -1,4 +1,5 @@
 import { Position, Replace } from "../models/position";
+import { UserData } from "../models/userData";
 import DbgPositionRepository from "../services/data/position/dbgPositionRepository";
 import IPositionRepository from "../services/data/position/iPositionRepository";
 
@@ -23,5 +24,9 @@ export default class GroupController {
 
     public setPosition(userID : number, posID : number) {
         this.positionRepository.setPosition(userID, posID);
+    }
+
+    public positionList(workers : UserData[]) {
+        return (workers.map(worker => this.positionRepository.getUserPosition(worker.id)));
     }
 }

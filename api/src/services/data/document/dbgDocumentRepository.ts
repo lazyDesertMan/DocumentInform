@@ -15,7 +15,7 @@ class DbgDocumentRepository implements IDocumentRepository {
         return [...DbgDocumentRepository.documents];
     }
 
-    find(docsID: number[]): Document[] {
+    public find(docsID: number[]): Document[] {
         const docs : Document[] = [];
         for (let curIdx = 0; curIdx < docsID.length; curIdx++) {
             const curDoc = this.findOne(docsID[curIdx]);
@@ -33,7 +33,7 @@ class DbgDocumentRepository implements IDocumentRepository {
         return null;
     }
 
-    add(doc: Document): number {
+    public add(doc: Document): number {
         DbgDocumentRepository.currentIdx++;
         doc.id = DbgDocumentRepository.currentIdx;
         DbgDocumentRepository.documents.push(doc);

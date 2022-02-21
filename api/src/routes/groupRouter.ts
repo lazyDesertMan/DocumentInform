@@ -15,4 +15,8 @@ groupRouter.get("/position", (req : express.Request, res : express.Response) => 
         res.status(401).end();
 });
 
+groupRouter.get("/positionList", (req : express.Request, res : express.Response) => {
+    res.send(groupController.positionList(userController.workersList()));
+});
+
 export default groupRouter;
