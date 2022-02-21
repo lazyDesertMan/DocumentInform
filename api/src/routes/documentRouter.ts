@@ -54,6 +54,10 @@ documentRouter.get("/read", (req: express.Request, res: express.Response) => {
     }
     else
         res.send("");
-})
+});
+
+documentRouter.get("/list", roleCheckMiddleware([Roles.ROLE_DIRECTOR]), (req: express.Request, res: express.Response) => {
+    res.send(documentController.list());
+});
 
 export default documentRouter;

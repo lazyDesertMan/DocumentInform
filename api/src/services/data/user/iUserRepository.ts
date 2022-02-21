@@ -3,6 +3,7 @@ import { UserData } from "../../../models/userData";
 
 interface IUserRepository {
     list() : UserData[];
+    workersList() : UserData[];
     findByID(id : number) : UserData;
     auth(login : string, password : string) : UserData;
     add(login : string, password : string, name : string, role : Roles) : void;

@@ -12,7 +12,17 @@ class dbgUserRepository implements iUserRepository {
     private static id : number = dbgUserRepository.users.length + 1;
 
     public list(): UserData[] {
-        return dbgUserRepository.users;
+        return [...dbgUserRepository.users];
+    }
+
+    public workersList(): UserData[] {
+        const users = [...dbgUserRepository.users];
+        for (let idx = 0; idx < users.length; idx++) {
+            if (users[idx].role === Roles.ROLE_DIRECTOR) {
+                users.splice(idx, 1);
+            }
+        }
+        return users;
     }
 
     public findByID(id: number): UserData {

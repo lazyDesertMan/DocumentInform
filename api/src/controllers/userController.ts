@@ -42,4 +42,12 @@ export default class UserController {
     public findUserByID(userID : number) : UserData {
         return this.userRepository.findByID(userID)
     }
+
+    public workersList() : UserData[] {
+        return this.userRepository.workersList();
+    }
+
+    public list() : UserData[] {
+        return this.userRepository.list();
+    }
 }

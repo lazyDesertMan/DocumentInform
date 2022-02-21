@@ -12,7 +12,7 @@ class DbgDocumentRepository implements IDocumentRepository {
     private static currentIdx = DbgDocumentRepository.documents.length + 1;
 
     public list(): Document[] {
-        return DbgDocumentRepository.documents;
+        return [...DbgDocumentRepository.documents];
     }
 
     find(docsID: number[]): Document[] {
