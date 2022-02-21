@@ -130,9 +130,9 @@ const Report = observer(() =>{
                                 {Array.from({ length: rep.list.tasks.length }).map((_, idx) => (
                                     <tr key={"tbody" + idx}>
                                     <td>{idx + 1}</td>
-                                    <td>Административная пизда которая хочет понюхать жопу</td>
-                                    <td>{rep.list.tasks[idx].task.startDate}</td>
-                                    <td>{rep.list.tasks[idx].task.deadline}</td>
+                                    <td>Очень длинное название документа - проверка - проверка</td>
+                                    <td>{new Date(Date.parse(rep.list.tasks[idx].task.startDate)).toLocaleString()}</td>
+                                    <td>{new Date(Date.parse(rep.list.tasks[idx].task.deadline)).toLocaleString()}</td>
                                     <td>{rep.list.tasks[idx].task.type === 1 ? "Прочитать" : "Переслать" }</td>
                                     <td>{rep.list.tasks[idx].status === 1 ? "Выполнено" 
                                         :rep.list.tasks[idx].status === 2 ? "Не выполненно (без нарушений)" 
@@ -168,8 +168,8 @@ const TaskListPlace = observer(() => {
                                 <strong className="mb-1">{tasks.list[idx].document}</strong>
                                 <small>{ tasks.list[idx].type === 1 ? "Прочитать" : "Переслать" }</small>
                                 </div>
-                                <div className="col-10 mb-1 small">Выдано {tasks.list[idx].startDate}</div>
-                                <div className="col-10 mb-1 small">Выполнить до {tasks.list[idx].deadline}</div>
+                                <div className="col-10 mb-1 small">Выдано {new Date(Date.parse(tasks.list[idx].startDate)).toLocaleString()}</div>
+                                <div className="col-10 mb-1 small">Выполнить до {new Date(Date.parse(tasks.list[idx].deadline)).toLocaleString()}</div>
                             </a>
                         ))}
                     </div>
