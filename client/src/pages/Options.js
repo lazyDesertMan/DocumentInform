@@ -1,9 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import { SetFiles } from "../http/userAPI";
-import addDoc from "../assets/svg/add_document.svg";
-import addUser from "../assets/svg/add_user.svg";
-import download from "../assets/svg/download.svg";
+import addDoc from "../assets/png/add_document.png";
+import addUser from "../assets/png/add_user.png";
+import download from "../assets/png/download.png";
 import { Button, Modal} from "react-bootstrap";
 
 async function load(fData) {

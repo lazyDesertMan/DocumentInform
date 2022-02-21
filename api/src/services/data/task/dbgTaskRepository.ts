@@ -7,7 +7,7 @@ import { ResendTask } from "../../../models/task/resendTask";
 class DbgTaskRepository implements ITaskRepository {
     private static activeTasks : ITask[] = [
         new ReadTask(1, "doc 1", 1, 2, 1, new Date(Date.now() - 100000), new Date(Date.now() + 100000)),
-        new ReadTask(2, "doc 2", 2, 2, 1, new Date(Date.now() - 100000), new Date(Date.now() - 10)),
+        new ReadTask(2, "doc 3", 3, 2, 1, new Date(Date.now() - 100000), new Date(Date.now() - 10)),
         new ResendTask(3, "doc 2", 2, 2, 2, new Date(Date.now() - 100000), new Date(Date.now()))
     ];
     private static completedTasks : CompleteFact[] = [
@@ -86,7 +86,7 @@ class DbgTaskRepository implements ITaskRepository {
         for (let idx : number = 0; idx < DbgTaskRepository.activeTasks.length; idx++)
             if (DbgTaskRepository.activeTasks[idx].ID == taskID) {
                 DbgTaskRepository.completedTasks.push(
-                    new CompleteFact(userID, new Date(), DbgTaskRepository.activeTasks.splice(idx)[0])
+                    new CompleteFact(userID, new Date(), DbgTaskRepository.activeTasks.splice(idx, 1)[0])
                 );
                 return;
             }

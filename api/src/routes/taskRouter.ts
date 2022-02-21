@@ -23,13 +23,12 @@ taskRouter.get("/active", roleCheckMiddleware([Roles.ROLE_WORKER, Roles.ROLE_LEA
         console.error(e);
         res.send("");
     }
-    console.log("response");
 });
 
-taskRouter.get("/complete", roleCheckMiddleware([Roles.ROLE_WORKER, Roles.ROLE_LEADER]), (req : express.Request, res : express.Response) => {
+taskRouter.get("/completed", roleCheckMiddleware([Roles.ROLE_WORKER, Roles.ROLE_LEADER]), (req : express.Request, res : express.Response) => {
     try {
         const user : UserData = userContrl.getActiveUser(req);
-        const tasks: CompleteFact[] = taskContrl.completeTaskList(user);
+        const tasks: CompleteFact[] = taskContrl.completedTaskList(user);
         res.send(JSON.stringify(tasks, null, 2));
     } catch (e) {
         console.error(e);
@@ -55,6 +54,18 @@ taskRouter.post("/add", roleCheckMiddleware([Roles.ROLE_LEADER, Roles.ROLE_DIREC
         console.error(e);
         res.status(400);
         res.send("Не удалось добавить задание");
+    }
+});
+
+taskRouter.post("/complete", roleCheckMiddleware([Roles.ROLE_WORKER, Roles.ROLE_LEADER]), (req : express.Request, res : express.Response) => {
+    try {
+        const user : UserData = userContrl.getActiveUser(req);
+        const taskID : number = Number(req.body.taskID);
+        taskContrl.comleteTask(user, taskID);
+        res.sendStatus(200);
+    } catch (e) {
+        console.error(e);
+        res.sendStatus(403);
     }
 });
 

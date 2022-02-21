@@ -41,6 +41,10 @@ export const authRoutes = [
         Component: PDF
     },
     {
+        path: PDF_ROUTE + '/:id/:taskID' ,
+        Component: PDF
+    },
+    {
         path: OPTIONS_ROUTE ,
         Component: Options
     },
