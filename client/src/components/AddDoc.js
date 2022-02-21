@@ -20,6 +20,7 @@ const AddDoc = () => {
     const navigate = useNavigate();
     const [info, setInfo] = useState(" ");
     const [drag, setDrag] = useState(false);
+    const [startDate, setStartDate] = useState('');
 
     const DragStartHandler = (e)=>{
         e.preventDefault()
@@ -69,9 +70,11 @@ const AddDoc = () => {
                     <Form.Control 
                         className="mt-3"
                         placeholder="Путь до файла" />
-                    <Form.Control 
-                        className="mt-3"
-                        placeholder="Дата вступления в силу" />
+                    <input 
+                        type="date" 
+                        className="mt-3" 
+                        placeholder="Дата вступления в силу"
+                        onChange={e=>setStartDate(e.target.value)}></input>
                     <div style={{marginTop: '3%'}} className="d-flex justify-content-center align-items-center">
                                     <div className="frame">
                                         {drag
