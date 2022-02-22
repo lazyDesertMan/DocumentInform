@@ -134,6 +134,10 @@ export const publicRoutes = [
         Component: Home
     },
     {
+        path: TASKS_ROUTE ,
+        Component: Tasks
+    },
+    {
         path: ERROR_ROUTE ,
         Component: Error
     },

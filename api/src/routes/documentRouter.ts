@@ -6,6 +6,7 @@ import { Roles, UserData } from '../models/userData';
 
 import * as fs from 'fs';
 import roleCheckMiddleware from '../middlewares/roleCheckMiddleware';
+import { randomUUID } from 'crypto';
 
 const documentRouter = express.Router();
 const documentController : DocumentController = new DocumentController();
@@ -21,16 +22,18 @@ documentRouter.post("/add", (req: express.Request, res: express.Response) => {
     const doc : Document = new Document();
     doc.name = String(req.body.name);
     doc.description = String(req.body.description);
-    doc.filePath = String(req.body.filePath);
+    doc.filePath = String(randomUUID()) + ".pdf";
     doc.effectiveDate = new Date(req.body.effectiveDate);
     res.send(documentController.add(doc).toString());
 });
 
-documentRouter.post("/load", roleCheckMiddleware([Roles.ROLE_LEADER]), (req: express.Request, res: express.Response) => {
+documentRouter.post("/load", roleCheckMiddleware([Roles.ROLE_DIRECTOR]), (req: express.Request, res: express.Response) => {
     if (!fs.existsSync(require.main.path + "/files")) {
         fs.mkdirSync(require.main.path + "/files");
     }
-    const outStream = fs.createWriteStream(require.main.path + "/files/test.pdf", { flags: "a" });
+    const id = Number(req.get("X-File-Id"));
+    const document : Document = documentController.findByID(id);
+    const outStream = fs.createWriteStream(require.main.path + "/files/" + document.filePath, { flags: "a" });
     req.on("close", () => outStream.close());
     req.pipe(outStream);
     res.sendStatus(200);

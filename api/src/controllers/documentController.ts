@@ -26,6 +26,10 @@ class DocumentController {
     public add(doc : Document) : number {
         return this.documentRepository.add(doc);
     }
+
+    public findByID(id : number) : Document {
+        return this.documentRepository.findOne(id);
+    }
 }
 
 export default DocumentController;

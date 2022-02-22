@@ -64,15 +64,16 @@ export const GetReport = async (id) => {
     }
 }
 // TODO не знаю даже
-export const SetFiles = async (fData) => {
-    const request = new Request('http://localhost:1337/api/upload', {
+export const SetFile = async (id, fData) => {
+    const request = new Request('http://localhost:1337/api/document/load', {
         mode: 'cors',
         method: "POST",
         credentials: "include",
         headers: {
-            'Content-Type': 'application/pdf'
+            'Content-Type': 'application/pdf',
+            'X-File-Id': id
         },
-        body: pdfjs.stringify(fData),
+        body: fData,
         //body: JSON.stringify(fData),
     });
     try {
@@ -153,8 +154,8 @@ export const GetListPosition = async () => {
 }
 // Внесение нового задания
 export async function SetTask(type, document, recipient, startDate, deadline) {
-    const data = { type : type, document : document, recipient : recipient, startDate : startDate, deadline : deadline}
-    const request = new Request('http://localhost1337/api/task/add' , {
+    const data = { type : type, document : document, recipient : recipient, start : startDate, end : deadline}
+    const request = new Request('http://localhost:1337/api/task/add' , {
         mode: 'cors',
         method: "POST",
         credentials: "include",
@@ -171,3 +172,26 @@ export async function SetTask(type, document, recipient, startDate, deadline) {
     }
 }
 
+export async function AddDocument(name, description, date) {
+    const data = { name: name, description: description, effectiveDate: date };
+    const request = new Request('http://localhost:1337/api/document/add' , {
+        mode: 'cors',
+        method: "POST",
+        credentials: "include",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+    try {
+        return await (await fetch(request)).json()
+    }
+    catch(e) {
+        console.log(e);
+        return null;
+    }
+}
+
+export async function LoadDocument() {
+    
+}

@@ -1,23 +1,20 @@
 import React from "react";
 import { Button, Card, Container, Form } from "react-bootstrap";
 import { useState } from "react";
-import { SetFiles } from "../http/userAPI";
+import { AddDocument, SetFile } from "../http/userAPI";
 import download from "../assets/png/download.png";
 import { useNavigate } from "react-router-dom";
 import { OPTIONS_ROUTE } from "../utils/consts";
 
-async function load(fData) {
-    try{
-        await SetFiles(fData)
-    } catch(e) {
-        console.log(e);
-    }
-}
 // для передачи на сервер
 const formData = new FormData();
+let files = new Array();
 
 const AddDoc = () => {
+
     const navigate = useNavigate();
+    const [fileName, setFileName] = useState("");
+    const [description, setDescription] = useState("");
     const [info, setInfo] = useState(" ");
     const [drag, setDrag] = useState(false);
     const [startDate, setStartDate] = useState('');
@@ -32,7 +29,7 @@ const AddDoc = () => {
     }
     const onDropHandler = (e) =>{
         e.preventDefault();
-        let files = [...e.dataTransfer.files]
+        files = [...e.dataTransfer.files]
         /*for(let i = 0; i < files.length; i++){
             formData.append('file', files[i]);
             name += files[i].name + " ";
@@ -42,16 +39,20 @@ const AddDoc = () => {
         setDrag(false);
     }
 
+
     const loadFile = (e) => {
         e.preventDefault();
-        let files = [...e.target.files]
+        files = [...e.target.files];
         formData.append('file', files[0]);
         setInfo(files[0].name + " " + files[0].size/1000 + "KB");
     }
-    const ButtonAdd = () =>{
-        //Передать файл и редиректнуться обратно
-        //load(formData);
-        navigate(OPTIONS_ROUTE);
+    const ButtonAdd = async () =>{
+        if (files && files[0]) {
+            const docID = await AddDocument(fileName, description, startDate);
+            console.log(docID);
+            await SetFile(docID, files[0]);
+            navigate(OPTIONS_ROUTE);
+        }
     }
     return(
         <Container 
@@ -63,13 +64,12 @@ const AddDoc = () => {
                 <Form className="d-flex flex-column">
                     <Form.Control 
                         className="mt-3"
-                        placeholder="Название" />
+                        placeholder="Название"
+                        onChange={e => setFileName(e.target.value)} />
                     <Form.Control 
                         className="mt-3"
-                        placeholder="Описание" />
-                    <Form.Control 
-                        className="mt-3"
-                        placeholder="Путь до файла" />
+                        placeholder="Описание"
+                        onChange={e => setDescription(e.target.value)} />
                     <input 
                         type="date" 
                         className="mt-3" 
@@ -92,7 +92,7 @@ const AddDoc = () => {
                                     </div>
                                     <div className="input__wrapper">
                                         <input name="file" type="file" name="file" id="input__file" className="input input__file" onChange={e => loadFile(e)}/>
-                                        <label for="input__file" className="input__file-button">
+                                        <label htmlFor="input__file" className="input__file-button">
                                             <span className="input__file-icon-wrapper"><img className="input__file-icon" src={download} alt="Выбрать файл" width="25"/></span>
                                             <span className="input__file-button-text">Выберите файл</span>
                                         </label>

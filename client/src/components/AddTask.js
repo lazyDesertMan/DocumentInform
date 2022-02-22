@@ -95,11 +95,11 @@ const AddTaskCard = observer(() => {
             setUser('')
     }
     const ButtonAdd = async () =>{
-        if(type == 1){
-            //await SetTask(type, idDoc, idUser, startDate, deadline);
+        if(type === 1){
+            await SetTask(type, idDoc, idUser, startDate, deadline);
         }   
-        else if(type == 2){
-           //await SetTask(type, idDoc, idPos, startDate, deadline);
+        else if(type === 2){
+           await SetTask(type, idDoc, idPos, startDate, deadline);
         }
         navigate(OPTIONS_ROUTE);
     }
