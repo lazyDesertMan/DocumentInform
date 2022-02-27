@@ -4,7 +4,7 @@ import { Button, Card, Container, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { Context } from "..";
 import { ERROR_ROUTE, HOME_ROUTE, PROFILE_ROUTE } from "../utils/consts";
-import { authorization } from "../http/userAPI";
+import { Authentication } from "../http/userAPI";
 import Cookies from "js-cookie";
 import jwtDecode from "jwt-decode";
 
@@ -15,7 +15,7 @@ const Login = observer(() => {
     const [password, setPassword] = useState('')
     const signIn = async () =>{
         try{
-            let data = await authorization(login, password)
+            let data = await Authentication(login, password)
             console.log(data);
             if(data === false){
                 navigate(HOME_ROUTE);

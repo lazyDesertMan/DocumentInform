@@ -52,27 +52,6 @@ const NavBar = () => {
                                     <Button 
                                         variant={"outline-dark"} 
                                         className="mt-2"
-                                        onClick={() => navigate(TASKS_ROUTE)}
-                                    >
-                                        Задачи
-                                    </Button>
-                                    <Button 
-                                        variant={"outline-dark"} 
-                                        className="mt-2"
-                                        onClick={() => navigate(COMPLETED_ROUTE)}
-                                    >
-                                        Выполненное
-                                    </Button>
-                                    <Button 
-                                        variant={"outline-dark"} 
-                                        className="mt-2"
-                                        onClick={() => navigate(DOCUMENT_ROUTE)}
-                                    >
-                                        Файлы
-                                    </Button>
-                                    <Button 
-                                        variant={"outline-dark"} 
-                                        className="mt-2"
                                         onClick={() => navigate(OPTIONS_ROUTE)}
                                     >
                                         Администрация

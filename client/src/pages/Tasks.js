@@ -13,7 +13,7 @@ let tasks = new TaskList();
 
 let rep = new ReportList();
 
-async function load() {
+async function loadReport() {
     let us = jwtDecode(Cookies.get("usr"))
     let repTMP = new ReportList();
     try{
@@ -26,7 +26,7 @@ async function load() {
     }
 }
 const Tasks = () =>{
-    load().then(response => {
+    loadReport().then(response => {
         rep.list = response.list;
     })
     return(<TasksSearch/>)
@@ -36,7 +36,8 @@ const TasksSearch = observer(() => {
     const [send, setSend] = useState(false);
     const [search, setSearch] = useState("");
 
-    const getListDoc = async () =>{
+    console.log(JSON.stringify(rep.list));
+    const loadTasks = async () =>{
         let unfiltredTasks = await GetTasks();
         let filtred = [];
         if (familiarize || send) {
@@ -60,7 +61,7 @@ const TasksSearch = observer(() => {
         tasks.list = filtred;
     }
 
-    getListDoc();
+    loadTasks();
 
     return(
         <>
@@ -130,7 +131,7 @@ const Report = observer(() =>{
                                 {Array.from({ length: rep.list.tasks.length }).map((_, idx) => (
                                     <tr key={"tbody" + idx}>
                                     <td>{idx + 1}</td>
-                                    <td>Очень длинное название документа - проверка - проверка</td>
+                                    <td>{rep.list.tasks[idx].task.document}</td>
                                     <td>{new Date(Date.parse(rep.list.tasks[idx].task.startDate)).toLocaleString()}</td>
                                     <td>{new Date(Date.parse(rep.list.tasks[idx].task.deadline)).toLocaleString()}</td>
                                     <td>{rep.list.tasks[idx].task.type === 1 ? "Прочитать" : "Переслать" }</td>

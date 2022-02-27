@@ -87,10 +87,6 @@ export const adminRoutes = [
         Component: Profile
     },
     {
-        path: DOCUMENT_ROUTE,
-        Component: Document
-    },
-    {
         path: COMPLETED_ROUTE ,
         Component: Completed
     },
@@ -101,10 +97,6 @@ export const adminRoutes = [
     {
         path: ERROR_ROUTE ,
         Component: Error
-    },
-    {
-        path: TASKS_ROUTE ,
-        Component: Tasks
     },
     {
         path: PDF_ROUTE + '/:id' ,

@@ -7,7 +7,7 @@ import { observer } from "mobx-react-lite";
 
 let docs = new DocumentList();
 
-async function load() {
+async function loadDocuments() {
     try{
         let data = await GetDocuments()
         docs.list = data;
@@ -19,7 +19,7 @@ async function load() {
 }
 
 const Document = () => {
-    load().then(response => {
+    loadDocuments().then(response => {
         docs.list = response.list;
     })
 
